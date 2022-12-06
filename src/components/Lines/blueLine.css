@@ -1,0 +1,14 @@
+.blueLineBgColor {
+  background-color: #6ca7e2;
+  height: 4rem;
+}
+.blueLineBorder {
+  border: 3px solid white;
+  color: white;
+  background-color: #6ca7e2;
+  cursor: pointer;
+}
+.blueLineBorder:hover {
+  color: #6ca7e2;
+  background-color: white;
+}

@@ -1,0 +1,15 @@
+.whiteLineTextColor {
+  color: #352d26;
+}
+.productBorder-Bg {
+  border: 1px solid black;
+  background-color: white;
+}
+.productBorder-BgTotal {
+  border: 1px solid black;
+  background-color: white;
+}
+.productBorder-Bg:hover {
+  color: #f2f2f2;
+  background-color: black;
+}

@@ -1,0 +1,10 @@
+.customFontAndSize {
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+.customFontAndSize:hover {
+  color: gray;
+}
+.bg-customFontAndSize {
+  background-color: #f2f2f2;
+}

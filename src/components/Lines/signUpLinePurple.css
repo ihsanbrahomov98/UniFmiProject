@@ -1,0 +1,11 @@
+.signUpLinePurple {
+  background-color: #614270;
+  height: 12rem;
+}
+.signUpLinePurple_text {
+  border: 3px solid black;
+}
+.signUpLinePurple_text:hover {
+  color: black;
+  background-color: black;
+}

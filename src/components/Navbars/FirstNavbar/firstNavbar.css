@@ -1,0 +1,13 @@
+.customBorder {
+  border: 1px solid #e1e5e8;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.customBorder:hover {
+  background-color: #f4f4f4;
+  color: #474b4e;
+}
+.customBorder .customGray {
+  color: #888189;
+  font-size: 0.9rem;
+}
