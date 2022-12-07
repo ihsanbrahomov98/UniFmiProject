@@ -7,3 +7,24 @@
   color: white;
   background-color: #8baa8d;
 }
+.adminDashBoardPurpleButton {
+  color: purple;
+  border: 2px solid black;
+
+  cursor: pointer;
+}
+
+.adminDashBoardPurpleButton:hover {
+  color: white;
+  background-color: purple;
+}
+.adminDashBoardRedButton {
+  color: red;
+  border: 2px solid black;
+
+  cursor: pointer;
+}
+.adminDashBoardRedButton:hover {
+  color: white;
+  background-color: red;
+}

@@ -11,13 +11,23 @@ const AdminDashBoardMainBody = () => {
         </div>
         <div className="TABLE-INFO container border">
           <div className="row border-bottom pb-3 pt-3">
-            <div className="col-1">check</div>
-            <div className="col-2">1</div>
-            <div className="col-2">2</div>
+            <div className="col-1">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              ></input>
+            </div>
+            <div className="col-2">ID</div>
+            <div className="col-2">USER</div>
             <div className="col-2">3</div>
             <div className="col-2">4</div>
             <div className="col-3">5</div>
           </div>
+          <AdminDashBoardTableList />
+          <AdminDashBoardTableList />
+          <AdminDashBoardTableList /> <AdminDashBoardTableList />{" "}
           <AdminDashBoardTableList />
         </div>
       </div>
