@@ -1,4 +1,7 @@
 import React from "react";
+import CartProduct from "./CartProduct";
+import CartRefreshAndDeleteButtons from "./CartRefreshAndDeleteButtons";
+import CartCheckout from "./CartCheckout";
 
 const Cart = () => {
   return (
@@ -14,14 +17,11 @@ const Cart = () => {
           <div className="col-2">ОБЩО</div>
           <div className="col-1"></div>
         </div>
-        <hr />
-        <div className="row mt-5">
-          <div className="col-3">ПРОДУКТ</div>
-          <div className="col-3">120 lv</div>
-          <div className="col-3">ПРОДУКТ3</div>
-          <div className="col-2">120 lv</div>
-          <div className="col-1 ">X</div>
-        </div>
+        <CartProduct />
+        <CartProduct />
+        <CartProduct />
+        <CartRefreshAndDeleteButtons />
+        <CartCheckout />
       </div>
     </>
   );

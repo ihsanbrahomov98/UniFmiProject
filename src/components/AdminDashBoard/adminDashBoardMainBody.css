@@ -1,0 +1,9 @@
+.adminDashBoardMainBody {
+  border: 3px solid #8baa8d;
+  color: #8baa8d;
+  cursor: pointer;
+}
+.adminDashBoardMainBody:hover {
+  color: white;
+  background-color: #8baa8d;
+}
