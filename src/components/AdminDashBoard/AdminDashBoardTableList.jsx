@@ -20,6 +20,13 @@ const AdminDashBoardTableList = ({
   userId,
 }) => {
   const [modalShow, setModalShow] = React.useState(false);
+  const deleteProduct = () => {
+    axios.delete("http://localhost:5550/back/mock/api/deleteone", {
+      data: {
+        name: name,
+      },
+    });
+  };
   return (
     <>
       <div className="row border-bottom pb-3 pt-3 d-flex align-items-center">
@@ -70,7 +77,12 @@ const AdminDashBoardTableList = ({
                 onHide={() => setModalShow(false)}
               />
             </span>
-            <span className="adminDashBoardRedButton ps-2 pe-2">Delete </span>
+            <span
+              className="adminDashBoardRedButton ps-2 pe-2 "
+              onClick={deleteProduct}
+            >
+              Delete{" "}
+            </span>
           </div>
         </div>
       </div>
@@ -81,18 +93,13 @@ const AdminDashBoardTableList = ({
 function Modalst(props) {
   const [dropDownButtonLabel, setDropDownButtonLabel] = useState("man");
   const [data, setData] = useState({
-    name: "",
+    name: "are",
     img: "",
     description: "",
     cost: "",
     category: "man",
     color: [],
     size: [],
-  });
-  const [checked, setChecked] = useState({
-    black: false,
-    white: false,
-    blue: false,
   });
   const validate = (dataInfo, dataType) => {
     setData((prevState) => ({
@@ -109,28 +116,6 @@ function Modalst(props) {
       data.color.pop(col);
     }
   };
-  const check = () => {
-    if (data.color.find((e) => e === "black")) {
-      setChecked((prev) => ({
-        ...prev,
-        black: true,
-      }));
-    }
-    if (data.color.find((e) => e === "white")) {
-      setChecked((prev) => ({
-        ...prev,
-        white: true,
-      }));
-    }
-    if (data.color.find((e) => e === "blue")) {
-      setChecked((prev) => ({
-        ...prev,
-        blue: true,
-      }));
-    }
-    console.log(checked);
-  };
-
   const validateSize = (size) => {
     if (!data.size.find((e) => e === size)) {
       data.size.push(size);
@@ -138,19 +123,18 @@ function Modalst(props) {
       data.size.pop(size);
     }
   };
-
   const onSubmit = (value) => {
-    axios.post("http://localhost:5550/back/mock/api/create", {
+    axios.put("http://localhost:5550/back/mock/api/update", {
       name: data.name,
       img: data.img,
       description: data.description,
       color: data.color,
       size: data.size,
       cost: data.cost,
+      userId: 213123121,
       category: data.category,
     });
   };
-
   return (
     <Modal
       {...props}
@@ -161,12 +145,7 @@ function Modalst(props) {
       <Modal.Header className="modalBgSingleProduct p-4" closeButton>
         <div className="container d-flex align-items-center">
           <Modal.Title id="contained-modal-title-vcenter ">
-            <div
-              className="fs-5 fw-light d-flex align-items-center"
-              onClick={check}
-            >
-              view2
-            </div>
+            <div className="fs-5 fw-light d-flex align-items-center">view</div>
           </Modal.Title>
         </div>
       </Modal.Header>
@@ -181,7 +160,7 @@ function Modalst(props) {
               <Form.Control
                 onChange={(e) => validate(e.target.value, "name")}
                 placeholder="name"
-                value={props.name}
+                defaultValue={props.name}
               />
             </Col>
           </Form.Group>
@@ -192,7 +171,7 @@ function Modalst(props) {
             <Col sm="10">
               <Form.Control
                 placeholder="img"
-                value={props.img}
+                defaultValue={props.img}
                 onChange={(e) => validate(e.target.value, "img")}
               />
             </Col>
@@ -204,7 +183,7 @@ function Modalst(props) {
             <Col sm="10">
               <Form.Control
                 placeholder="description"
-                value={props.description}
+                defaultValue={props.description}
                 onChange={(e) => validate(e.target.value, "description")}
               />
             </Col>
@@ -216,7 +195,7 @@ function Modalst(props) {
             <Col sm="10">
               <Form.Control
                 placeholder="price"
-                value={props.cost}
+                defaultValue={props.cost}
                 onChange={(e) => validate(e.target.value, "cost")}
               />
             </Col>
@@ -267,7 +246,6 @@ function Modalst(props) {
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
-                    checked={checked.black}
                     onClick={() => validateColor("black")}
                   />
                   <label class="form-check-label me-2" for="flexCheckDefault">
@@ -280,7 +258,6 @@ function Modalst(props) {
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
-                    checked={checked.blue}
                     onClick={() => validateColor("blue")}
                   />
                   <label class="form-check-label me-2" for="flexCheckDefault">
@@ -293,7 +270,6 @@ function Modalst(props) {
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
-                    checked={checked.white}
                     onClick={() => validateColor("white")}
                   />
                   <label class="form-check-label me-2" for="flexCheckDefault">
@@ -352,7 +328,7 @@ function Modalst(props) {
                 style={{ width: "50%" }}
                 as="input"
                 type="button"
-                value="Създай"
+                value="редактирай"
                 onClick={() => onSubmit(data)}
               />{" "}
             </div>

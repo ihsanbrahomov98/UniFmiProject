@@ -9,6 +9,11 @@ const Products = ({ cat }) => {
   const [dropDownButtonLabel, setDropDownButtonLabel] =
     useState("Първо най-евтините");
   const [products, setProducts] = useState([]);
+  const [colorCheck, setColorCheck] = useState({
+    black: false,
+    blue: false,
+    white: false,
+  });
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get(
@@ -42,7 +47,7 @@ const Products = ({ cat }) => {
     setDropDownButtonLabel("Първо най-новите");
   };
   const setColor = (color) => {
-    setProducts((prev) => [...prev].filter((a) => a.color[0] === color));
+    console.log(colorCheck);
   };
   const setSize = (size) => {
     setProducts((prev) => [...prev].filter((a) => a.size[3] === size));
@@ -74,6 +79,7 @@ const Products = ({ cat }) => {
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
+                      onClick={() => setColor("blue")}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
                       Син
@@ -85,6 +91,7 @@ const Products = ({ cat }) => {
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
+                      onClick={() => setColor("white")}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
                       Бял

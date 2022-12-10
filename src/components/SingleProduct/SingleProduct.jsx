@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ModalSingleProduct from "./Modal/Modal";
 import "./singleProduct.css";
 import { Truck } from "react-bootstrap-icons";
 import { HandThumbsUp } from "react-bootstrap-icons";
 import { TelephoneInbound } from "react-bootstrap-icons";
 import AccordionItem from "./AccordionItem/AccordionItem";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const SingleProduct = () => {
+  const [products, setProducts] = useState([]);
+  let { id } = useParams();
+  useEffect(() => {
+    const fetchproducts = async () => {
+      const { data } = await axios.get(
+        `http://localhost:5550/back/mock/api/findone/${id}`
+      );
+
+      setProducts(data);
+      console.log(data);
+    };
+    fetchproducts();
+  }, []);
   return (
     <>
       <div className="container d-flex flex-row">
