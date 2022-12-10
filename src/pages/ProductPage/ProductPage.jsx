@@ -5,16 +5,13 @@ import FilterDropDown from "../../components/ProductPage/FilterDropDown/FilterDr
 import ProductsAndFilter from "../../components/ProductPage/ProductsAndFitler/ProductsAndFilter";
 import Footer from "../../components/Footer/Footer";
 import ThirdNavbar from "../../components/Navbars/ThirdNavbar/ThirdNavbar";
+import SecondNavbar from "../../components/Navbars/SecondNavbar/SecondNavbar";
+import ManProductPage from "../../components/ProductPage/ManProductPage";
+
 const ProductPage = () => {
   return (
     <>
-      <TopNavbar />
-      <ThirdNavbar />
-      <SubCategoryButtons />
-      <FilterDropDown />
-      <ProductsAndFilter />
-
-      <Footer />
+      <ManProductPage />
     </>
   );
 };

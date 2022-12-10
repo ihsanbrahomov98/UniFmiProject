@@ -5,6 +5,8 @@ import { Truck } from "react-bootstrap-icons";
 import { HandThumbsUp } from "react-bootstrap-icons";
 import { TelephoneInbound } from "react-bootstrap-icons";
 import AccordionItem from "./AccordionItem/AccordionItem";
+import axios from "axios";
+
 const SingleProduct = () => {
   return (
     <>

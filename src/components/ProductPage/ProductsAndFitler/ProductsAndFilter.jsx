@@ -1,7 +1,7 @@
 import React from "react";
 import Filter from "./Filter/Filter";
 import Products from "./Products/Products";
-const ProductsAndFilter = () => {
+const ProductsAndFilter = ({ cat }) => {
   return (
     <>
       <div className="container ">
@@ -10,7 +10,7 @@ const ProductsAndFilter = () => {
             <Filter />
           </div>
           <div className="col-10">
-            <Products />
+            <Products cat={cat} />
           </div>
         </div>
       </div>

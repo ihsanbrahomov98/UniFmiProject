@@ -1,22 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Product = () => {
+const Product = ({ imgSrc, altInfo, linkUrl, nameInfo, price }) => {
   return (
     <>
-      <div className="container  " style={{ height: "22rem", width: "17rem" }}>
-        <Link to={"/product/1"}>
+      <div className="containe " style={{ height: "22rem", width: "17rem" }}>
+        <Link to={linkUrl}>
           <div>
             <img
-              src="./221025-102_1web.jpg"
-              alt="tree"
+              src={imgSrc}
+              alt={altInfo}
               style={{ width: "100%", height: "100%" }}
               className=" border figure-img img-fluid rounded"
             />
-            <div>Вълнен бобър</div>
-            <div className="fs-5 mt-1">207 лв</div>
+            <div>{nameInfo}</div>
+            <div className="fs-5 mt-1">{price} лв</div>
           </div>
         </Link>
       </div>
+      <div className="" style={{ height: "10rem" }}></div>
     </>
   );
 };

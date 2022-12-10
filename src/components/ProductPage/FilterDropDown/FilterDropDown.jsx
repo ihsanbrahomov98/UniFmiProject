@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const FilterDropDown = () => {
+const FilterDropDown = ({ cat }) => {
   return (
     <>
-      <div className="container d-flex justify-content-end ">First new</div>
+      <div className="container d-flex justify-content-end "></div>
     </>
   );
 };

@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/product" element={<ProductPage />}></Route>
-        <Route path="/product/1" element={<SingleProductPage />}></Route>
+        <Route path="/product/:id" element={<SingleProductPage />}></Route>
         <Route path="/cart" element={<CartPage />}></Route>
         <Route path="/admindashboard" element={<AdminDashBoardPage />}></Route>
       </Routes>

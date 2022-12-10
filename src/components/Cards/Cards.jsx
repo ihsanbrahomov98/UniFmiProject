@@ -7,9 +7,10 @@ const Cards = () => {
         <div className="row">
           <div className="col-6">
             <img
-              src="./sb-3822-m050-christmas-2698836-lights-v2.webp"
+              src="./b1.webp"
               alt="tree"
               style={{ width: "100%", height: "100%" }}
+              className=" border figure-img img-fluid rounded"
             />
 
             <div className="fw-bold fs-4 pt-1">
@@ -20,9 +21,10 @@ const Cards = () => {
           </div>
           <div className="col-6">
             <img
-              src="./sb-3922-m050-selected-toys-v2.webp"
+              src="./b2.webp"
               alt="tree"
               style={{ width: "100%", height: "100%" }}
+              className=" border figure-img img-fluid rounded"
             />
             <div className="fw-bold fs-4 pt-1">
               Christmas trees, lights and decorations

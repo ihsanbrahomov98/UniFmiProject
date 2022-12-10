@@ -10,25 +10,25 @@ function ControlledCarousel() {
       <div className="carousel-inner ">
         <div className="carousel-item active" data-bs-interval="10000">
           <img
-            src="./sb-3922-M001.webp"
+            src="./b3.webp"
             className="d-block w-100 img-fluid img-thumbnail"
-            style={{ height: "30rem" }}
+            style={{ height: "40rem" }}
             alt="..."
           />
         </div>
         <div className="carousel-item" data-bs-interval="2000">
           <img
-            src="./sb-3922-M001.webp"
+            src="./b3.webp"
             className="d-block w-100 img-fluid img-thumbnail"
-            style={{ height: "30rem" }}
+            style={{ height: "40rem" }}
             alt="..."
           />
         </div>
         <div className="carousel-item">
           <img
-            src="./sb-3922-M001.webp"
+            src="./b3.webp"
             className="d-block w-100 img-fluid img-thumbnail"
-            style={{ height: "30rem" }}
+            style={{ height: "40rem" }}
             alt="..."
           />
         </div>

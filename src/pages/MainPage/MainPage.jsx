@@ -16,10 +16,12 @@ import WhiteLine from "../../components/Lines/WhiteLine";
 import PreferableCards from "../../components/Cards/PreferableCards";
 import BlueLine from "../../components/Lines/BlueLine";
 import Footer from "../../components/Footer/Footer";
+import TopNavbar from "../../components/ProductPage/Navbars/TopNavbar";
+
 const MainPage = () => {
   return (
     <div>
-      <FirstNavbar />
+      <TopNavbar />
       <SecondNavbar />
       <ThirdNavbar />
       <ControlledCarousel />
