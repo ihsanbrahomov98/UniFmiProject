@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./adminDashBoardMainBody.css";
+import Modal from "react-bootstrap/Modal";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Button from "react-bootstrap/Button";
+import axios from "axios";
 
-const AdminDashBoardTableList = () => {
+const AdminDashBoardTableList = ({
+  name,
+  img,
+  description,
+  cost,
+  category,
+  color,
+  size,
+  userId,
+}) => {
+  const [modalShow, setModalShow] = React.useState(false);
   return (
     <>
       <div className="row border-bottom pb-3 pt-3 d-flex align-items-center">
@@ -15,7 +33,7 @@ const AdminDashBoardTableList = () => {
             ></input>
           </div>
         </div>
-        <div className="col-2 ">2</div>
+        <div className="col-2 ">{userId}</div>
         <div className="col-2">
           <div className="">
             <div className=" d-flex align-items- justify-content-start flex-row">
@@ -24,7 +42,7 @@ const AdminDashBoardTableList = () => {
                 alt="tree"
                 style={{ width: "12%", height: "7%" }}
               />
-              <span className="ps-3">Jane </span>
+              <span className="ps-3">{name} </span>
             </div>
           </div>
         </div>
@@ -35,7 +53,22 @@ const AdminDashBoardTableList = () => {
         <div className="col-3">
           <div className=" d-flex align-items- justify-content-start flex-row">
             <span className="adminDashBoardPurpleButton ps-2 pe-2 me-3">
-              View{" "}
+              <div onClick={() => setModalShow(true)}>
+                <div className=" modalCursor ">view2</div>
+              </div>
+
+              <Modalst
+                show={modalShow}
+                name={name}
+                img={img}
+                description={description}
+                cost={cost}
+                category={category}
+                color={color}
+                size={size}
+                userId={userId}
+                onHide={() => setModalShow(false)}
+              />
             </span>
             <span className="adminDashBoardRedButton ps-2 pe-2">Delete </span>
           </div>
@@ -44,5 +77,290 @@ const AdminDashBoardTableList = () => {
     </>
   );
 };
+
+function Modalst(props) {
+  const [dropDownButtonLabel, setDropDownButtonLabel] = useState("man");
+  const [data, setData] = useState({
+    name: "",
+    img: "",
+    description: "",
+    cost: "",
+    category: "man",
+    color: [],
+    size: [],
+  });
+  const [checked, setChecked] = useState({
+    black: false,
+    white: false,
+    blue: false,
+  });
+  const validate = (dataInfo, dataType) => {
+    setData((prevState) => ({
+      ...prevState,
+      [dataType]: dataInfo,
+    }));
+    console.log(data);
+  };
+
+  const validateColor = (col) => {
+    if (!data.color.find((e) => e === col)) {
+      data.color.push(col);
+    } else {
+      data.color.pop(col);
+    }
+  };
+  const check = () => {
+    if (data.color.find((e) => e === "black")) {
+      setChecked((prev) => ({
+        ...prev,
+        black: true,
+      }));
+    }
+    if (data.color.find((e) => e === "white")) {
+      setChecked((prev) => ({
+        ...prev,
+        white: true,
+      }));
+    }
+    if (data.color.find((e) => e === "blue")) {
+      setChecked((prev) => ({
+        ...prev,
+        blue: true,
+      }));
+    }
+    console.log(checked);
+  };
+
+  const validateSize = (size) => {
+    if (!data.size.find((e) => e === size)) {
+      data.size.push(size);
+    } else {
+      data.size.pop(size);
+    }
+  };
+
+  const onSubmit = (value) => {
+    axios.post("http://localhost:5550/back/mock/api/create", {
+      name: data.name,
+      img: data.img,
+      description: data.description,
+      color: data.color,
+      size: data.size,
+      cost: data.cost,
+      category: data.category,
+    });
+  };
+
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header className="modalBgSingleProduct p-4" closeButton>
+        <div className="container d-flex align-items-center">
+          <Modal.Title id="contained-modal-title-vcenter ">
+            <div
+              className="fs-5 fw-light d-flex align-items-center"
+              onClick={check}
+            >
+              view2
+            </div>
+          </Modal.Title>
+        </div>
+      </Modal.Header>
+
+      <Modal.Body>
+        <Form>
+          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+            <Form.Label column sm="2">
+              name
+            </Form.Label>
+            <Col sm="10">
+              <Form.Control
+                onChange={(e) => validate(e.target.value, "name")}
+                placeholder="name"
+                value={props.name}
+              />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+            <Form.Label column sm="2">
+              Img
+            </Form.Label>
+            <Col sm="10">
+              <Form.Control
+                placeholder="img"
+                value={props.img}
+                onChange={(e) => validate(e.target.value, "img")}
+              />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+            <Form.Label column sm="2">
+              Description
+            </Form.Label>
+            <Col sm="10">
+              <Form.Control
+                placeholder="description"
+                value={props.description}
+                onChange={(e) => validate(e.target.value, "description")}
+              />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+            <Form.Label column sm="2">
+              Price
+            </Form.Label>
+            <Col sm="10">
+              <Form.Control
+                placeholder="price"
+                value={props.cost}
+                onChange={(e) => validate(e.target.value, "cost")}
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+            <Form.Label column sm="2">
+              Category
+            </Form.Label>
+            <Col sm="10">
+              <DropdownButton id="dropdown-basic-button" title={props.category}>
+                <Dropdown.Item
+                  onClick={(e) => {
+                    setDropDownButtonLabel("man");
+                    validate("man", "category");
+                  }}
+                >
+                  man
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={(e) => {
+                    setDropDownButtonLabel("woman");
+                    validate("woman", "category");
+                  }}
+                >
+                  woman
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={(e) => {
+                    setDropDownButtonLabel("child");
+                    validate("child", "category");
+                  }}
+                >
+                  child
+                </Dropdown.Item>
+              </DropdownButton>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="mb-2" controlId="formPlaintext">
+            <Form.Label column sm="2">
+              Color
+            </Form.Label>
+            <Col sm="10">
+              <div className="d-flex flex-row mt-2">
+                <span class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                    checked={checked.black}
+                    onClick={() => validateColor("black")}
+                  />
+                  <label class="form-check-label me-2" for="flexCheckDefault">
+                    Черен
+                  </label>
+                </span>
+                <span class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                    checked={checked.blue}
+                    onClick={() => validateColor("blue")}
+                  />
+                  <label class="form-check-label me-2" for="flexCheckDefault">
+                    Син
+                  </label>
+                </span>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                    checked={checked.white}
+                    onClick={() => validateColor("white")}
+                  />
+                  <label class="form-check-label me-2" for="flexCheckDefault">
+                    Бял
+                  </label>
+                </div>
+              </div>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="" controlId="formPlaintext">
+            <Form.Label column sm="2">
+              Size
+            </Form.Label>
+            <Col sm="10">
+              <div className="d-flex flex-row mt-2 ">
+                <span class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                    onClick={() => validateSize("41")}
+                  />
+                  <label class="form-check-label me-2" for="flexCheckDefault">
+                    41
+                  </label>
+                </span>
+                <span class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                    onClick={() => validateSize("42")}
+                  />
+                  <label class="form-check-label me-2" for="flexCheckDefault">
+                    42
+                  </label>
+                </span>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                    onClick={() => validateSize("43")}
+                  />
+                  <label class="form-check-label me-2" for="flexCheckDefault">
+                    43
+                  </label>
+                </div>
+              </div>
+            </Col>
+            <div className={"d-flex justify-content-center mt-3"}>
+              <Button
+                style={{ width: "50%" }}
+                as="input"
+                type="button"
+                value="Създай"
+                onClick={() => onSubmit(data)}
+              />{" "}
+            </div>
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+    </Modal>
+  );
+}
 
 export default AdminDashBoardTableList;

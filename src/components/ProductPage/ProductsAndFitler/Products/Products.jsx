@@ -15,23 +15,11 @@ const Products = ({ cat }) => {
         "http://localhost:5550/back/mock/api/findall"
       );
 
-      const filteredItems = data.filter((item) => item.category === cat);
-      setProducts(filteredItems);
-      console.log(filteredItems);
+      setProducts(data);
+      console.log(data);
     };
     fetchproducts();
   }, []);
-  useEffect(() => {
-    console.log("skapo2");
-    if (sort === "евтино") {
-      setProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
-    } else if (sort === "скъпо") {
-      setProducts((prev) => [...prev].sort((a, b) => b.price - a.price));
-    } else {
-      setProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
-    }
-  }, [sort, setSort]);
-
   const sortLowestPrice = () => {
     setProducts((prev) => [...prev].sort((a, b) => a.price - b.price));
     setDropDownButtonLabel("Първо най-евтините");
