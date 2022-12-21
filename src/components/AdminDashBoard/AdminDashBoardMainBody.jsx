@@ -10,7 +10,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-const AdminDashBoardMainBody = () => {
+const AdminDashBoardMainBody = ({ table }) => {
   const [modalShow, setModalShow] = useState(false);
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -18,7 +18,7 @@ const AdminDashBoardMainBody = () => {
       const { data } = await axios.get(
         "http://localhost:5550/back/mock/api/findall"
       );
-
+      // TODO Тука ще трябва да се взимат данните от продутките, усери или админи
       setProducts(data);
       console.log(data);
     };
@@ -29,8 +29,8 @@ const AdminDashBoardMainBody = () => {
       <div className="container  ">
         <div className="d-flex justify-content-between p-2">
           <div className="fs-5 fw-bold">Customers</div>
-          <div className="adminDashBoardMainBody p-2">
-            <div onClick={() => setModalShow(true)}>add new</div>
+          <div className="adminDashBoardMainBody pt-1 pb-1 ps-2 pe-2">
+            <div onClick={() => setModalShow(true)}> Add new </div>
             <Modalst show={modalShow} onHide={() => setModalShow(false)} />
           </div>
         </div>

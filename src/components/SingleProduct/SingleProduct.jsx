@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const SingleProduct = () => {
-  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState([]);
   let { id } = useParams();
   useEffect(() => {
     const fetchproducts = async () => {
@@ -17,7 +17,7 @@ const SingleProduct = () => {
         `http://localhost:5550/back/mock/api/findone/${id}`
       );
 
-      setProducts(data);
+      setProduct(data);
       console.log(data);
     };
     fetchproducts();
@@ -54,10 +54,16 @@ const SingleProduct = () => {
                 <div className="m-2">
                   Начало / Облекла / Връхни облекла / Якета / ЯКЕ CASUAL NAVY
                 </div>
-                <div className="m-2 fs-2 fw-bold">ЯКЕ CASUAL NAVY 2</div>
-                <div className="m-2 fs-4 fw-bold">170,00 лв.</div>
-                <div className="m-2">text</div>
-                <div className="m-2">text</div>
+                <div className="m-2 fs-2 fw-bold">{product.name}</div>
+                <span className="m-2 fs-5 productNameColor  productPriceLine">
+                  {product.price * 1.2} ,00 лв.
+                </span>
+                <span className="fs-5 productPrice ms-2">
+                  {product.price} ,00 лв.
+                </span>
+
+                <div className="m-2">{product.description}</div>
+                <div className="m-2">{product.category}</div>
                 <div className="m-2">
                   <div className="d-flex flex-row">
                     <span

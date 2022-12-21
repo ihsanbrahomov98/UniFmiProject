@@ -6,14 +6,12 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Accordion from "react-bootstrap/Accordion";
 const Products = ({ cat }) => {
   const [sort, setSort] = useState("скъпо");
+  const [originalData, setOriginalData] = useState();
   const [dropDownButtonLabel, setDropDownButtonLabel] =
     useState("Първо най-евтините");
   const [products, setProducts] = useState([]);
-  const [colorCheck, setColorCheck] = useState({
-    black: false,
-    blue: false,
-    white: false,
-  });
+  const [checkedBlack, setCheckedBlack] = useState(false);
+  const [checkedBlue, setCheckedBlue] = useState(false);
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get(
@@ -21,6 +19,7 @@ const Products = ({ cat }) => {
       );
 
       setProducts(data);
+      setOriginalData(data);
       console.log(data);
     };
     fetchproducts();
@@ -47,7 +46,47 @@ const Products = ({ cat }) => {
     setDropDownButtonLabel("Първо най-новите");
   };
   const setColor = (color) => {
-    console.log(colorCheck);
+    if (!checkedBlack) {
+      setProducts((prev) =>
+        [...prev].filter(
+          (item) =>
+            item.color[0] === color ||
+            item.color[1] === color ||
+            item.color[2] === color
+        )
+      );
+      setCheckedBlack(true);
+    } else {
+      setCheckedBlack(false);
+      setProducts(originalData);
+    }
+    if (!checkedBlue) {
+      setProducts((prev) =>
+        [...prev].filter(
+          (item) =>
+            item.color[0] === color ||
+            item.color[1] === color ||
+            item.color[2] === color
+        )
+      );
+      if (setCheckedBlack) {
+        setProducts(
+          (prev) => [...prev],
+          products.filter(
+            (item) =>
+              item.color[0] === "black" ||
+              item.color[1] === "black" ||
+              item.color[2] === "black"
+          )
+        );
+      }
+      setCheckedBlue(true);
+    } else {
+      setCheckedBlue(false);
+      setProducts(originalData);
+    }
+
+    console.log(products);
   };
   const setSize = (size) => {
     setProducts((prev) => [...prev].filter((a) => a.size[3] === size));
@@ -79,7 +118,7 @@ const Products = ({ cat }) => {
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
-                      onClick={() => setColor("blue")}
+                      onClick={() => setColor("white")}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
                       Син

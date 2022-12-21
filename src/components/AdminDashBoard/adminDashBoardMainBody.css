@@ -8,15 +8,19 @@
   background-color: #8baa8d;
 }
 .adminDashBoardPurpleButton {
-  color: purple;
+  color: #9d86f3;
   border: 2px solid black;
 
   cursor: pointer;
 }
+.customPurple {
+  color: #9d86f3;
+  text-decoration: none !important;
+}
 
 .adminDashBoardPurpleButton:hover {
   color: white;
-  background-color: purple;
+  background-color: #9d86f3;
 }
 .adminDashBoardRedButton {
   color: red;
@@ -26,5 +30,16 @@
 }
 .adminDashBoardRedButton:hover {
   color: white;
+  background-color: red;
+}
+.homePageCartPageButtons {
+  border: 3px solid red;
+  color: red;
+  cursor: pointer;
+}
+.homePageCartPageButtons:hover {
+  border: 3px solid red;
+  color: white;
+  cursor: pointer;
   background-color: red;
 }

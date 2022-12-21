@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const AdminDashBoardNavbar = () => {
   return (
     <>
@@ -7,16 +7,21 @@ const AdminDashBoardNavbar = () => {
         <div className=" d-flex ">
           <div
             style={{ height: "50px" }}
-            className="col-2 d-flex justify-content-center align-items-center border-end "
+            className="col-2 d-flex justify-content-center align-items-center border-end fs-4 customPurple "
           >
-            23
+            Ihsanadmin
           </div>
           <div
             style={{ height: "50px" }}
             className="col-10 d-flex justify-content-between align-items-center "
           >
-            <div className="p-4">1</div>
-            <div className="p-4">2</div>
+            <Link style={{ textDecoration: "none" }} to={"/"}>
+              <div className=" m-2 p-2 homePageCartPageButtons">Home Page</div>
+            </Link>
+
+            <Link style={{ textDecoration: "none" }} to={"/cart"}>
+              <div className=" m-3 p-2 homePageCartPageButtons">Cart Page</div>
+            </Link>
           </div>
         </div>
       </div>

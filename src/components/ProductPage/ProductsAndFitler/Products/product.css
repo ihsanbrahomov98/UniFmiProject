@@ -1,0 +1,10 @@
+.productNameColor {
+  color: #969696;
+}
+.productPriceLine {
+  color: #969696;
+  text-decoration-line: line-through;
+}
+.productPrice {
+  color: black;
+}
