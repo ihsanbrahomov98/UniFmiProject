@@ -17,10 +17,16 @@ const Products = ({ cat }) => {
       const { data } = await axios.get(
         "http://localhost:5550/back/mock/api/findall"
       );
+      let filteredData;
+      if (!cat === "all") {
+        filteredData = data.filter((item) => item.category === cat);
+      } else {
+        filteredData = data;
+      }
 
-      setProducts(data);
-      setOriginalData(data);
-      console.log(data);
+      setProducts(filteredData);
+      setOriginalData(filteredData);
+      console.log(filteredData);
     };
     fetchproducts();
   }, []);
@@ -204,11 +210,14 @@ const Products = ({ cat }) => {
               {products.map((product) => (
                 <div className="col-4">
                   <Product
-                    linkUrl={`/product/${product._id}`}
+                    linkUrl={`/${cat}/${product._id}`}
                     imgSrc={"./221025-102_1web.jpg"}
                     altInfo={"tree"}
                     nameInfo={product.name}
                     price={product.price}
+                    heightRem={"22rem"}
+                    widthRem={"17rem"}
+                    gutterRem={"10rem"}
                   />
                 </div>
               ))}

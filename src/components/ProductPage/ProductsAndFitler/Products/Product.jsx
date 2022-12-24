@@ -1,10 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./product.css";
-const Product = ({ imgSrc, altInfo, linkUrl, nameInfo, price }) => {
+const Product = ({
+  imgSrc,
+  altInfo,
+  linkUrl,
+  nameInfo,
+  price,
+  heightRem,
+  widthRem,
+  gutterRem,
+}) => {
   return (
     <>
-      <div className="container  " style={{ height: "22rem", width: "17rem" }}>
+      <div
+        className="container  "
+        style={{ height: heightRem, width: widthRem }}
+      >
         <Link style={{ textDecoration: "none" }} to={linkUrl}>
           <div>
             <img
@@ -27,7 +39,7 @@ const Product = ({ imgSrc, altInfo, linkUrl, nameInfo, price }) => {
         </Link>
       </div>
 
-      <div className="" style={{ height: "10rem" }}></div>
+      <div className="" style={{ height: gutterRem }}></div>
     </>
   );
 };

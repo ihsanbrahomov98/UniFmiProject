@@ -12,24 +12,24 @@ import { FaAtom } from "react-icons/fa";
 
 const BodyDropDown = (props) => {
   const [userState, setUserState] = useState({
-    name: "Toshko",
+    name: "NickName",
     user: true,
     isLoggedIn: true,
   });
   const arrayOfButtons = [
     {
-      leftIcon: <FaAtom fontSize={"1.5rem"} />,
-      rightIcon: <FaAngleRight fontSize={"1.5rem"} />,
+      leftIcon: <FaAtom fontSize={"1rem"} />,
+      rightIcon: <FaAngleRight fontSize={"1rem"} />,
       text: "React is cool",
     },
     {
-      leftIcon: <FaRegQuestionCircle fontSize={"1.5rem"} />,
-      rightIcon: <FaAngleRight fontSize={"1.5rem"} />,
+      leftIcon: <FaRegQuestionCircle fontSize={"1rem"} />,
+      rightIcon: <FaAngleRight fontSize={"1rem"} />,
       text: "Settings",
     },
     {
-      leftIcon: <FaRegMoon fontSize={"1.5rem"} />,
-      rightIcon: <FaAngleRight fontSize={"1.5rem"} />,
+      leftIcon: <FaRegMoon fontSize={"1rem"} />,
+      rightIcon: <FaAngleRight fontSize={"1rem"} />,
       text: "Night mode",
     },
   ];
@@ -52,7 +52,7 @@ const BodyDropDown = (props) => {
             ""
           ) : (
             <DropDownItem
-              leftIcon={<FaMailBulk fontSize={"1.5rem"} />}
+              leftIcon={<FaMailBulk fontSize={"1rem"} />}
               rightIcon={""}
               linkToComponent={"/register"}
             >
@@ -61,7 +61,7 @@ const BodyDropDown = (props) => {
           )}
 
           <DropDownItem
-            leftIcon={<FaDoorOpen fontSize={"1.5rem"} />}
+            leftIcon={<FaDoorOpen fontSize={"1rem"} />}
             rightIcon={""}
             linkToComponent={"/login"}
           >
