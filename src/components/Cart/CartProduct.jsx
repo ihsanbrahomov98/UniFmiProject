@@ -1,19 +1,19 @@
 import React from "react";
 
-const CartProduct = () => {
+const CartProduct = ({ imgSrc, price }) => {
   return (
     <>
       <hr />
       <div className="row mt-4">
         <div className="col-3">
           <img
-            src="https://carducci.bg/wp-content/uploads/2021/06/2004090138_1web.jpg"
+            src={imgSrc}
             alt="tree"
             style={{ width: "4rem", height: "5.5rem" }}
             className=" border figure-img img-fluid rounded"
           />
         </div>
-        <div className="col-3">120 lv</div>
+        <div className="col-3">{price} lv</div>
         <div className="col-3">
           <div className="d-flex flex-row">
             <span

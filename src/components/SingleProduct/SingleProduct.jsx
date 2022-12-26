@@ -5,11 +5,20 @@ import { Truck } from "react-bootstrap-icons";
 import { HandThumbsUp } from "react-bootstrap-icons";
 import { TelephoneInbound } from "react-bootstrap-icons";
 import AccordionItem from "./AccordionItem/AccordionItem";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addToCart,
+  removeFromCart,
+  increaseAmount,
+  decreaseAmount,
+} from "../../redux/Slice/ProductSlice";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState([]);
+  const [counter, setCounter] = useState(1);
+  const items = useSelector((state) => state.counter.cartItems);
   let { id } = useParams();
   useEffect(() => {
     const fetchproducts = async () => {
@@ -22,6 +31,26 @@ const SingleProduct = () => {
     };
     fetchproducts();
   }, []);
+  const dispatch = useDispatch();
+
+  const cartActionAddToCart = (product) => {
+    const filetItem = items.filter((item) => item._id === product._id);
+    if (filetItem.length === 0) {
+      dispatch(addToCart(product));
+    } else {
+      dispatch(increaseAmount(product));
+    }
+    console.log(filetItem);
+  };
+  const cartActionRemoveFromCart = (product) => {
+    const filetItem = items.filter((item) => item._id === product._id);
+    if (filetItem[0].amount === 1) {
+      dispatch(removeFromCart(product));
+    } else {
+      dispatch(decreaseAmount(product));
+    }
+    console.log(filetItem);
+  };
   return (
     <>
       <div className="container d-flex flex-row">
@@ -69,6 +98,10 @@ const SingleProduct = () => {
                     <span
                       class="mt-1 d-flex f-row justify-content-center align-items-center fs-5 fw-bold  productBorder-Bg   p-2 mt-4 me-2"
                       style={{ width: "4rem", height: "3.2rem" }}
+                      onClick={() => {
+                        cartActionAddToCart(product);
+                        setCounter((prev) => prev + 1);
+                      }}
                     >
                       +
                     </span>
@@ -76,11 +109,15 @@ const SingleProduct = () => {
                       class="mt-1 d-flex f-row justify-content-center align-items-center fs-6 fw-bold productBorder-BgTotal p-2 mt-4 me-2 "
                       style={{ width: "5.5rem", height: "3.2rem" }}
                     >
-                      1
+                      {counter}
                     </span>
                     <span
                       class="mt-1 d-flex f-row justify-content-center align-items-center fs-5 fw-bold productBorder-Bg  p-2 mt-4 "
                       style={{ width: "4rem", height: "3.2rem" }}
+                      onClick={() => {
+                        cartActionRemoveFromCart(product);
+                        setCounter((prev) => prev - 1);
+                      }}
                     >
                       -
                     </span>

@@ -10,7 +10,7 @@ import { CaretDown } from "react-bootstrap-icons";
 import { CaretUp } from "react-bootstrap-icons";
 import ButtonDropDown from "./NavbarDropDownMenu/ButtonDropDown/ButtonDropDown";
 import ModalSearch from "./ModalSearch.jsx/ModalSearch";
-
+import { Link } from "react-router-dom";
 const SecondNavbar = () => {
   const [toggledDropDownOne, setToggledDropDownOne] = useState(false);
   const [toggledDropDownTwo, setToggledDropDownTwo] = useState(false);
@@ -71,9 +71,11 @@ const SecondNavbar = () => {
             <div className="ButtonDropDown_Arrow"></div>
             <BodyOfDropDown open={open} />{" "}
           </div>
-          <div className="d-flex  p-2 justify-content-center align-items-center">
-            <Cart className=" customFont" />
-          </div>
+          <Link style={{ textDecoration: "none", color: "black" }} to={"/cart"}>
+            <div className="d-flex  p-2 justify-content-center align-items-center">
+              <Cart className=" customFont" />
+            </div>
+          </Link>
         </div>
       </div>
     </>

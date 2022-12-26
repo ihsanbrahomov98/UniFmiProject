@@ -8,7 +8,7 @@ const CartPage = () => {
   return (
     <>
       <TopNavbar />
-      <SecondNavbar />
+
       <ThirdNavbar />
       <Cart />
       <Footer />

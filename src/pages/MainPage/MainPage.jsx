@@ -22,7 +22,7 @@ const MainPage = () => {
   return (
     <div>
       <TopNavbar />
-      <SecondNavbar />
+
       <ThirdNavbar />
       <ControlledCarousel />
       <IconList />
