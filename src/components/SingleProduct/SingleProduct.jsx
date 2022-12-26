@@ -17,7 +17,7 @@ import axios from "axios";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState([]);
-  const [counter, setCounter] = useState(1);
+  const [counter, setCounter] = useState(0);
   const items = useSelector((state) => state.counter.cartItems);
   let { id } = useParams();
   useEffect(() => {

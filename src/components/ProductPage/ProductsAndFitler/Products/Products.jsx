@@ -4,6 +4,8 @@ import axios from "axios";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Accordion from "react-bootstrap/Accordion";
+import Pagination from "react-bootstrap/Pagination";
+
 const Products = ({ cat }) => {
   const [sort, setSort] = useState("скъпо");
   const [originalData, setOriginalData] = useState();
@@ -97,6 +99,15 @@ const Products = ({ cat }) => {
   const setSize = (size) => {
     setProducts((prev) => [...prev].filter((a) => a.size[3] === size));
   };
+  let active = 1;
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>
+    );
+  }
   return (
     <>
       <div className="container ">
@@ -224,6 +235,7 @@ const Products = ({ cat }) => {
             </div>
           </div>
         </div>
+        <Pagination>{items}</Pagination>
       </div>
     </>
   );

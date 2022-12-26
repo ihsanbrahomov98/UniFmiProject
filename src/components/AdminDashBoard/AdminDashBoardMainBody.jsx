@@ -9,10 +9,15 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const AdminDashBoardMainBody = ({ table }) => {
   const [modalShow, setModalShow] = useState(false);
   const [products, setProducts] = useState([]);
+  const [selected, setSelected] = useState("users");
+  let location = useLocation();
+
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get(
@@ -24,18 +29,72 @@ const AdminDashBoardMainBody = ({ table }) => {
     };
     fetchproducts();
   }, []);
+  useEffect(() => {
+    setSelected(location.pathname.split("/")[2]);
+  }, [location]);
   return (
     <>
       <div className="container  ">
-        <div className="d-flex justify-content-between p-2">
-          <div className="fs-5 fw-bold">Customers</div>
-          <div className="adminDashBoardMainBody pt-1 pb-1 ps-2 pe-2">
-            <div onClick={() => setModalShow(true)}> Add new </div>
-            <Modalst show={modalShow} onHide={() => setModalShow(false)} />
+        <div className="TABLE-INFO  border">
+          <div className="row  d-flex ">
+            <Link
+              style={{
+                textDecoration: "none",
+                color: selected === "products" ? "black" : "white",
+              }}
+              to={"/admindashboard/products"}
+              className={"fs-5 col-4 pe-0 "}
+            >
+              <div
+                className={
+                  selected === "products"
+                    ? "adminDashBoardMainBodyBlackOrange ps-2   pb-3 pt-3 "
+                    : "adminDashBoardMainBodyBlackColor ps-2  pb-3 pt-3 "
+                }
+              >
+                Products
+              </div>
+            </Link>
+            <Link
+              className={"fs-5 col-4 ps-0 pe-0"}
+              style={{
+                textDecoration: "none",
+                color: selected === "users" ? "black" : "white",
+              }}
+              to={"/admindashboard/users"}
+            >
+              <div
+                className={
+                  selected === "users"
+                    ? "adminDashBoardMainBodyBlackOrange  pb-3 pt-3 ps-2 "
+                    : "adminDashBoardMainBodyBlackColor pb-3 pt-3   ps-2 "
+                }
+              >
+                Users
+              </div>
+            </Link>
+            <Link
+              className={"fs-5 col-4 ps-0 "}
+              style={{
+                textDecoration: "none",
+                color: selected === "admins" ? "black" : "white",
+              }}
+              to={"/admindashboard/admins"}
+            >
+              <div
+                className={
+                  selected === "admins"
+                    ? "adminDashBoardMainBodyBlackOrange ps-2  pb-3 pt-3 "
+                    : "adminDashBoardMainBodyBlackColor ps-2  pb-3 pt-3  "
+                }
+              >
+                Admins
+              </div>
+            </Link>
           </div>
         </div>
         <div className="TABLE-INFO container border">
-          <div className="row border-bottom pb-3 pt-3">
+          <div className="row  border-bottom pb-3 pt-3 d-flex align-items-center">
             <div className="col-1">
               <input
                 class="form-check-input"
@@ -48,7 +107,12 @@ const AdminDashBoardMainBody = ({ table }) => {
             <div className="col-2">USER</div>
             <div className="col-2">3</div>
             <div className="col-2">4</div>
-            <div className="col-3">5</div>
+            <div className="col-1">5</div>
+
+            <span className=" col-1 adminDashBoardMainBody pt-1 pb-1 ms-5 d-flex  justify-content-center align-items-center">
+              <span onClick={() => setModalShow(true)}> Add new </span>
+              <Modalst show={modalShow} onHide={() => setModalShow(false)} />
+            </span>
           </div>
           {products.map((e) => (
             <AdminDashBoardTableList

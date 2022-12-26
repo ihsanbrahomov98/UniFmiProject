@@ -59,9 +59,9 @@ const AdminDashBoardTableList = ({
         </div>
         <div className="col-3">
           <div className=" d-flex align-items- justify-content-start flex-row">
-            <span className="adminDashBoardPurpleButton ps-2 pe-2 me-3">
+            <span className="adminDashBoardMainBody ps-2 pe-2 me-3">
               <div onClick={() => setModalShow(true)}>
-                <div className=" modalCursor ">view2</div>
+                <div className=" modalCursor ">view</div>
               </div>
 
               <Modalst

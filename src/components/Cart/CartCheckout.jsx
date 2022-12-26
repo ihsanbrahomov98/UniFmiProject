@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./cartCheckout.css";
-const CartCheckout = () => {
+
+const CartCheckout = ({ products }) => {
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      let value = 0;
+      for (let index = 0; index < products.length; index++) {
+        value += products[index].amount * products[index].price;
+      }
+      setTotal(value);
+    };
+    products && calculateTotal();
+  }, [products]);
+
   return (
     <>
       <div className=" m-4">
@@ -14,12 +28,18 @@ const CartCheckout = () => {
           <div className="col-8"></div>
           <div className="col-4 border p-3">
             <div className="d-flex justify-content-between p-3 ">
-              <div className="">Общо</div>
-              <div className="">123 лв.</div>
+              <div className="">С Отстъпка</div>
+              <div className="">
+                {total}
+                лв.
+              </div>
             </div>
             <div className="d-flex justify-content-between  p-3  ">
               <div className="">Общо</div>
-              <div className="">123 лв.</div>
+              <div className="">
+                {total}
+                лв.
+              </div>
             </div>
             <div className="d-flex justify-content-center  ">
               <span

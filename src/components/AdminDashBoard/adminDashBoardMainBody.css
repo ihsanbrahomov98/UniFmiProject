@@ -1,26 +1,38 @@
 .adminDashBoardMainBody {
-  border: 3px solid #8baa8d;
-  color: #8baa8d;
+  border: 3px solid orange;
+  color: black;
   cursor: pointer;
+  background-color: orange;
+}
+.adminDashBoardMainBodyBlackColor {
+  background-color: black;
+  text-decoration: none !important;
+
+  color: "white";
+}
+.adminDashBoardMainBodyBlackOrange {
+  text-decoration: none !important;
+  background-color: #f17200;
 }
 .adminDashBoardMainBody:hover {
-  color: white;
-  background-color: #8baa8d;
+  color: orange;
+  background-color: black;
+  border: 3px solid black;
 }
-.adminDashBoardPurpleButton {
-  color: #9d86f3;
+.adminDashBoardWhiteButton {
+  color: orange;
   border: 2px solid black;
 
   cursor: pointer;
 }
-.customPurple {
-  color: #9d86f3;
+.customOrange {
+  color: orange;
   text-decoration: none !important;
 }
 
-.adminDashBoardPurpleButton:hover {
+.adminDashBoardWhiteButton:hover {
   color: white;
-  background-color: #9d86f3;
+  background-color: orange;
 }
 .adminDashBoardRedButton {
   color: red;

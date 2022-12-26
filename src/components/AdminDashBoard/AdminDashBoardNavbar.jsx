@@ -7,22 +7,21 @@ const AdminDashBoardNavbar = () => {
         <div className=" d-flex ">
           <div
             style={{ height: "50px" }}
-            className="col-2 d-flex justify-content-center align-items-center border-end fs-4 customPurple "
+            className="col-2 d-flex justify-content-center align-items-center border-end fs-4 customOrange "
           >
-            Ihsanadmin
+            Admin Panel
           </div>
           <div
             style={{ height: "50px" }}
-            className="col-10 d-flex justify-content-between align-items-center "
+            className="col-8 d-flex justify-content-end align-items-center "
+          ></div>
+          <Link
+            className="col-2 d-flex justify-content-center align-items-center border-start fs-4 customOrange "
+            style={{ textDecoration: "none", color: "orange" }}
+            to="/"
           >
-            <Link style={{ textDecoration: "none" }} to={"/"}>
-              <div className=" m-2 p-2 homePageCartPageButtons">Home Page</div>
-            </Link>
-
-            <Link style={{ textDecoration: "none" }} to={"/cart"}>
-              <div className=" m-3 p-2 homePageCartPageButtons">Cart Page</div>
-            </Link>
-          </div>
+            <div>Home Page</div>
+          </Link>
         </div>
       </div>
     </>
