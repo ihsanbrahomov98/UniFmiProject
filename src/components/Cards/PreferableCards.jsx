@@ -12,8 +12,8 @@ const PreferableCards = () => {
               style={{ width: "80%", height: "80%" }}
               className="figure-img img-fluid rounded"
             />
-            <div className="pt-2">Fifa 23.</div>
-            <div className="fw-bold fs-5 pt-1">From 10lv.</div>
+            <div className="pt-2 ps-4">Fifa 23</div>
+            <div className="fw-bold fs-5 pt-1 ps-4">От 25 лв.</div>
           </div>
           <div className="col-3">
             <img
@@ -22,8 +22,8 @@ const PreferableCards = () => {
               style={{ width: "80%", height: "80%" }}
               className="figure-img img-fluid rounded"
             />
-            <div className="pt-2">Fifa 23.</div>
-            <div className="fw-bold fs-5 pt-1">From 10lv.</div>
+            <div className="pt-2 ps-4">Pixel 7 Pro</div>
+            <div className="fw-bold fs-5 pt-1 ps-4">От 700 лв.</div>
           </div>
           <div className="col-3">
             <img
@@ -32,8 +32,8 @@ const PreferableCards = () => {
               style={{ width: "80%", height: "80%" }}
               className="figure-img img-fluid rounded"
             />
-            <div className="pt-2">Fifa 23.</div>
-            <div className="fw-bold fs-5 pt-1">From 10lv.</div>
+            <div className="pt-2 ps-4">Pixel 7</div>
+            <div className="fw-bold fs-5 pt-1 ps-4">От 400 лв.</div>
           </div>
           <div className="col-3">
             <img
@@ -42,8 +42,8 @@ const PreferableCards = () => {
               style={{ width: "80%", height: "80%" }}
               className="figure-img img-fluid rounded"
             />
-            <div className="pt-2">Fifa 23.</div>
-            <div className="fw-bold fs-5 pt-1">From 10lv.</div>
+            <div className="pt-2 ps-4">Pixel 6a</div>
+            <div className="fw-bold fs-5 pt-1 ps-4">От 300 лв.</div>
           </div>
         </div>
         <div className="container" style={{ height: "3rem" }}></div>

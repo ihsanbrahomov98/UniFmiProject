@@ -12,11 +12,9 @@ const SmallCards = () => {
               style={{ width: "100%", height: "100%" }}
             />
 
-            <div className="fw-bold fs-4 pt-1">
-              Christmas trees, lights and decorations
-            </div>
-            <div className="pt-1">Selected lines.</div>
-            <div className="pt-1">Shop now</div>
+            <div className="fw-bold fs-4 pt-1">Коледнни продукти</div>
+            <div className="pt-1">Избери своя продукт</div>
+            <div className="pt-1">Пазарувай сега</div>
           </div>
           <div className="col-4">
             <img
@@ -24,11 +22,10 @@ const SmallCards = () => {
               alt="tree"
               style={{ width: "100%", height: "100%" }}
             />
-            <div className="fw-bold fs-4 pt-1">
-              Christmas trees, lights and decorations
-            </div>
-            <div className="pt-1">Selected lines.</div>
-            <div className="pt-1">Shop now</div>
+
+            <div className="fw-bold fs-4 pt-1">Коледнни продукти</div>
+            <div className="pt-1">Избери своя продукт</div>
+            <div className="pt-1">Пазарувай сега</div>
           </div>
           <div className="col-4">
             <img
@@ -36,11 +33,10 @@ const SmallCards = () => {
               alt="tree"
               style={{ width: "100%", height: "100%" }}
             />
-            <div className="fw-bold fs-4 pt-1">
-              Christmas trees, lights and decorations
-            </div>
-            <div className="pt-1">Selected lines.</div>
-            <div className="pt-1">Shop now</div>
+
+            <div className="fw-bold fs-4 pt-1">Коледнни продукти</div>
+            <div className="pt-1">Избери своя продукт</div>
+            <div className="pt-1">Пазарувай сега</div>
           </div>
         </div>
         <div className="container" style={{ height: "10rem" }}></div>

@@ -4,7 +4,7 @@ const BlackLine = () => {
   return (
     <>
       <div className="container d-flex f-row justify-content-start align-items-center text-white fw-bold fs-4 blackLineBgColor  ">
-        Brands
+        Най - продавани
       </div>
     </>
   );

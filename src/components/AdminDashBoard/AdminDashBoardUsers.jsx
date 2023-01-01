@@ -8,7 +8,7 @@ const AdminDashBoardUsers = () => {
     <>
       <AdminDashBoardNavbar />
 
-      <AdminDashBoardList table={"users"} />
+      <AdminDashBoardList table={"user"} />
     </>
   );
 };

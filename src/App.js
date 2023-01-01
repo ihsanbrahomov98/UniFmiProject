@@ -29,16 +29,16 @@ function App() {
         <Route path="/:cat/:id" element={<SingleProductPage />}></Route>
         <Route path="/cart" element={<CartPage />}></Route>
         <Route
+          path="/admindashboard/products"
+          element={<AdminDashBoard />}
+        ></Route>
+        <Route
           path="/admindashboard/users"
           element={<AdminDashBoardUsers />}
         ></Route>
         <Route
           path="/admindashboard/admins"
           element={<AdminDashBoardAdmins />}
-        ></Route>
-        <Route
-          path="/admindashboard/products"
-          element={<AdminDashBoardUsers />}
         ></Route>
       </Routes>
     </>

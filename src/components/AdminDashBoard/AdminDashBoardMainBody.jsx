@@ -15,14 +15,13 @@ import { useLocation } from "react-router-dom";
 const AdminDashBoardMainBody = ({ table }) => {
   const [modalShow, setModalShow] = useState(false);
   const [products, setProducts] = useState([]);
-  const [selected, setSelected] = useState("users");
+  const [selected, setSelected] = useState("products");
   let location = useLocation();
 
   useEffect(() => {
     const fetchproducts = async () => {
-      const { data } = await axios.get(
-        "http://localhost:5550/back/mock/api/findall"
-      );
+      console.log(table);
+      const { data } = await axios.get(`http://localhost:8082/${table}/all`);
       // TODO Тука ще трябва да се взимат данните от продутките, усери или админи
       setProducts(data);
       console.log(data);
@@ -111,11 +110,16 @@ const AdminDashBoardMainBody = ({ table }) => {
 
             <span className=" col-1 adminDashBoardMainBody pt-1 pb-1 ms-5 d-flex  justify-content-center align-items-center">
               <span onClick={() => setModalShow(true)}> Add new </span>
-              <Modalst show={modalShow} onHide={() => setModalShow(false)} />
+              <Modalst
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                table={table}
+              />
             </span>
           </div>
           {products.map((e) => (
             <AdminDashBoardTableList
+              id={e.id}
               name={e.name}
               img={e.img}
               description={e.description}
@@ -124,6 +128,7 @@ const AdminDashBoardMainBody = ({ table }) => {
               color={e.color}
               size={e.size}
               userId={e.userId}
+              table={table}
             />
           ))}
         </div>
@@ -165,14 +170,14 @@ function Modalst(props) {
     }
   };
   const onSubmit = (value) => {
-    axios.post("http://localhost:5550/back/mock/api/create", {
+    console.log(props.table);
+    axios.post(`http://localhost:8082/${props.table}/create`, {
       name: data.name,
       img: data.img,
       description: data.description,
       color: data.color,
       size: data.size,
       cost: data.cost,
-
       category: data.category,
     });
   };

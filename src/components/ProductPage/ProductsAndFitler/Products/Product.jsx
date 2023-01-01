@@ -32,9 +32,11 @@ const Product = ({
             <div></div>
 
             <span className="fs-5 productNameColor  productPriceLine">
-              {price * 1.2} лв.
+              {(price * 1.2).toFixed(2)} лв.
             </span>
-            <span className="fs-5 productPrice ms-2">{price} лв.</span>
+            <span className="fs-5 productPrice ms-2">
+              {(price * 1).toFixed(2)} лв.
+            </span>
           </div>
         </Link>
       </div>

@@ -18,14 +18,28 @@ const AdminDashBoardTableList = ({
   color,
   size,
   userId,
+  table,
+  id,
 }) => {
   const [modalShow, setModalShow] = React.useState(false);
   const deleteProduct = () => {
-    axios.delete("http://localhost:5550/back/mock/api/deleteone", {
-      data: {
-        name: name,
+    console.log(table);
+    axios.delete(
+      `http://localhost:8082/${table}/delete`,
+
+      {
+        data: {
+          id: 4,
+        },
       },
-    });
+      {
+        headers: {
+          Accept: "application/json; charset=utf-8",
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
   };
   return (
     <>
@@ -66,6 +80,7 @@ const AdminDashBoardTableList = ({
 
               <Modalst
                 show={modalShow}
+                id={id}
                 name={name}
                 img={img}
                 description={description}
@@ -74,6 +89,7 @@ const AdminDashBoardTableList = ({
                 color={color}
                 size={size}
                 userId={userId}
+                table={table}
                 onHide={() => setModalShow(false)}
               />
             </span>
@@ -124,15 +140,10 @@ function Modalst(props) {
     }
   };
   const onSubmit = (value) => {
-    axios.put("http://localhost:5550/back/mock/api/update", {
+    console.log(props.table);
+    axios.put(`http://localhost:8082/${props.table}/update`, {
+      id: 3,
       name: data.name,
-      img: data.img,
-      description: data.description,
-      color: data.color,
-      size: data.size,
-      cost: data.cost,
-      userId: 213123121,
-      category: data.category,
     });
   };
   return (
@@ -145,7 +156,9 @@ function Modalst(props) {
       <Modal.Header className="modalBgSingleProduct p-4" closeButton>
         <div className="container d-flex align-items-center">
           <Modal.Title id="contained-modal-title-vcenter ">
-            <div className="fs-5 fw-light d-flex align-items-center">view</div>
+            <div className="fs-5 fw-light d-flex align-items-center">
+              Information
+            </div>
           </Modal.Title>
         </div>
       </Modal.Header>

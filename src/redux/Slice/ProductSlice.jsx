@@ -17,7 +17,7 @@ export const counterSlice = createSlice({
     },
     increaseAmount: (state, action) => {
       state.cartItems.find((e) => {
-        if (e._id === action.payload._id) {
+        if (e.id === action.payload.id) {
           e.amount++;
         }
       });
@@ -25,7 +25,7 @@ export const counterSlice = createSlice({
     },
     decreaseAmount: (state, action) => {
       state.cartItems.find((e) => {
-        if (e._id === action.payload._id) {
+        if (e.id === action.payload.id) {
           e.amount--;
         }
       });

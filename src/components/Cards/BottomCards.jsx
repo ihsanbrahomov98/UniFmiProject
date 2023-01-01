@@ -12,11 +12,9 @@ const BottomCards = () => {
               style={{ width: "100%", height: "100%" }}
             />
 
-            <div className="fw-bold fs-4 pt-1">
-              Christmas trees, lights and decorations
-            </div>
-            <div className="pt-1">Selected lines.</div>
-            <div className="pt-1">Shop now</div>
+            <div className="fw-bold fs-4 pt-1">Електрическо Отопление</div>
+            <div className="pt-1">Избери своя продукт.</div>
+            <div className="pt-1">Пазарувай сега</div>
           </div>
           <div className="col-6">
             <img
@@ -24,11 +22,9 @@ const BottomCards = () => {
               alt="tree"
               style={{ width: "100%", height: "100%" }}
             />
-            <div className="fw-bold fs-4 pt-1">
-              Christmas trees, lights and decorations
-            </div>
-            <div className="pt-1">Selected lines.</div>
-            <div className="pt-1">Shop now</div>
+            <div className="fw-bold fs-4 pt-1">Електрическо Отопление</div>
+            <div className="pt-1">Избери своя продукт.</div>
+            <div className="pt-1">Пазарувай сега</div>
           </div>
         </div>
         <div className="container" style={{ height: "8rem" }}></div>

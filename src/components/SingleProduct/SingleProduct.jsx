@@ -23,7 +23,7 @@ const SingleProduct = () => {
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get(
-        `http://localhost:5550/back/mock/api/findone/${id}`
+        `http://localhost:8082/products/findone/${id}`
       );
 
       setProduct(data);
@@ -34,7 +34,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
 
   const cartActionAddToCart = (product) => {
-    const filetItem = items.filter((item) => item._id === product._id);
+    const filetItem = items.filter((item) => item.id === product.id);
     if (filetItem.length === 0) {
       dispatch(addToCart(product));
     } else {
@@ -43,7 +43,7 @@ const SingleProduct = () => {
     console.log(filetItem);
   };
   const cartActionRemoveFromCart = (product) => {
-    const filetItem = items.filter((item) => item._id === product._id);
+    const filetItem = items.filter((item) => item.id === product.id);
     if (filetItem[0].amount === 1) {
       dispatch(removeFromCart(product));
     } else {
@@ -85,10 +85,10 @@ const SingleProduct = () => {
                 </div>
                 <div className="m-2 fs-2 fw-bold">{product.name}</div>
                 <span className="m-2 fs-5 productNameColor  productPriceLine">
-                  {product.price * 1.2} ,00 лв.
+                  {(product.price * 1.2).toFixed(2)}лв.
                 </span>
                 <span className="fs-5 productPrice ms-2">
-                  {product.price} ,00 лв.
+                  {(product.price * 1).toFixed(2)}лв.
                 </span>
 
                 <div className="m-2">{product.description}</div>

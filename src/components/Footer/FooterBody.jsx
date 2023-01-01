@@ -27,7 +27,7 @@ const FooterBody = () => {
 
               <div className="d-flex flex-row justify-content-center align-items-center">
                 <img
-                  src="./1.webp"
+                  src="./v1.webp"
                   alt="logo"
                   className="figure-img img-fluid rounded m-2"
                   style={{ height: "1.5rem", width: "2rem" }}

@@ -10,9 +10,7 @@ const ModalSearch = (props) => {
   const [products, setProducts] = useState("");
   useEffect(() => {
     const fetchproducts = async () => {
-      const { data } = await axios.get(
-        "http://localhost:5550/back/mock/api/findall"
-      );
+      const { data } = await axios.get("http://localhost:8082/products/all");
 
       setProducts(data);
       console.log(data);
@@ -46,21 +44,23 @@ const ModalSearch = (props) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          {type &&
-            products
-              .filter((user) => user.name.toLowerCase().includes(type))
-              .slice(0, 4)
-              .map((product) => (
-                <div className="col-2 me-5 ">
-                  <Product
-                    linkUrl={`/${"all"}/${product._id}`}
-                    imgSrc={"./221025-102_1web.jpg"}
-                    altInfo={"tree"}
-                    nameInfo={product.name}
-                    price={product.price}
-                  />
-                </div>
-              ))}
+          <div className="d-flex">
+            {type &&
+              products
+                .filter((user) => user.name.toLowerCase().includes(type))
+                .slice(0, 4)
+                .map((product) => (
+                  <div className="col-2 me-5 ">
+                    <Product
+                      linkUrl={`/${"all"}/${product.id}`}
+                      imgSrc={"./221025-102_1web.jpg"}
+                      altInfo={"tree"}
+                      nameInfo={product.name}
+                      price={product.price}
+                    />
+                  </div>
+                ))}
+          </div>
         </Modal.Footer>
       </Modal>
     </>

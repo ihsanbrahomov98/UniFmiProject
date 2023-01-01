@@ -14,10 +14,10 @@ const Cards = () => {
             />
 
             <div className="fw-bold fs-4 pt-1">
-              Christmas trees, lights and decorations
+              Избрани продкути, Лимитирана серия
             </div>
-            <div className="pt-1">Selected lines.</div>
-            <div className="pt-1">Shop now</div>
+            <div className="pt-1">Избери своя продукт</div>
+            <div className="pt-1">Пазарувай сега</div>
           </div>
           <div className="col-6">
             <img
@@ -27,10 +27,10 @@ const Cards = () => {
               className=" border figure-img img-fluid rounded"
             />
             <div className="fw-bold fs-4 pt-1">
-              Christmas trees, lights and decorations
+              Избрани продкути, Лимитирана серия
             </div>
-            <div className="pt-1">Selected lines.</div>
-            <div className="pt-1">Shop now</div>
+            <div className="pt-1">Избери своя продукт</div>
+            <div className="pt-1">Пазарувай сега</div>
           </div>
         </div>
         <div className="container" style={{ height: "8rem" }}></div>

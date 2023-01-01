@@ -11,7 +11,7 @@ const CartProduct = ({ imgSrc, price, amount, product }) => {
   const dispatch = useDispatch();
 
   const cartActionAddToCart = (product) => {
-    const filetItem = items.filter((item) => item._id === product._id);
+    const filetItem = items.filter((item) => item.id === product.id);
     if (filetItem.length === 0) {
       dispatch(addToCart(product));
     } else {
@@ -20,7 +20,7 @@ const CartProduct = ({ imgSrc, price, amount, product }) => {
     console.log(filetItem);
   };
   const cartActionRemoveFromCart = (product) => {
-    const filetItem = items.filter((item) => item._id === product._id);
+    const filetItem = items.filter((item) => item.id === product.id);
     if (filetItem[0].amount === 1) {
       dispatch(removeFromCart(product));
     } else {
