@@ -20,16 +20,17 @@ const AdminDashBoardTableList = ({
   userId,
   table,
   id,
+  email,
 }) => {
   const [modalShow, setModalShow] = React.useState(false);
   const deleteProduct = () => {
-    console.log(table);
+    console.log(id);
     axios.delete(
       `http://localhost:8082/${table}/delete`,
 
       {
         data: {
-          id: 4,
+          id: id,
         },
       },
       {
@@ -54,7 +55,7 @@ const AdminDashBoardTableList = ({
             ></input>
           </div>
         </div>
-        <div className="col-2 ">{userId}</div>
+        <div className="col-2 ">{id}</div>
         <div className="col-2">
           <div className="">
             <div className=" d-flex align-items- justify-content-start flex-row">
@@ -67,7 +68,8 @@ const AdminDashBoardTableList = ({
             </div>
           </div>
         </div>
-        <div className="col-2">asdas@abv.bg</div>
+
+        <div className="col-2">{table === "products" ? category : email}</div>
         <div className="col-2 " style={{ color: "green" }}>
           active
         </div>
@@ -90,6 +92,7 @@ const AdminDashBoardTableList = ({
                 size={size}
                 userId={userId}
                 table={table}
+                email={email}
                 onHide={() => setModalShow(false)}
               />
             </span>
@@ -109,13 +112,17 @@ const AdminDashBoardTableList = ({
 function Modalst(props) {
   const [dropDownButtonLabel, setDropDownButtonLabel] = useState("man");
   const [data, setData] = useState({
-    name: "are",
+    name: "",
     img: "",
     description: "",
-    cost: "",
+    price: "",
     category: "man",
-    color: [],
-    size: [],
+    color: "",
+    size: "",
+    amount: "",
+    season: "",
+    email: "",
+    id: props.id,
   });
   const validate = (dataInfo, dataType) => {
     setData((prevState) => ({
@@ -125,26 +132,28 @@ function Modalst(props) {
     console.log(data);
   };
 
-  const validateColor = (col) => {
-    if (!data.color.find((e) => e === col)) {
-      data.color.push(col);
-    } else {
-      data.color.pop(col);
-    }
-  };
-  const validateSize = (size) => {
-    if (!data.size.find((e) => e === size)) {
-      data.size.push(size);
-    } else {
-      data.size.pop(size);
-    }
-  };
   const onSubmit = (value) => {
     console.log(props.table);
-    axios.put(`http://localhost:8082/${props.table}/update`, {
-      id: 3,
-      name: data.name,
-    });
+    if (props.table === "products") {
+      axios.put(`http://localhost:8082/${props.table}/update`, {
+        name: data.name,
+        img: data.img,
+        description: data.description,
+        color: data.color,
+        size: data.size,
+        category: data.category,
+        price: data.price,
+        amount: data.amount,
+        season: data.season,
+        id: props.id,
+      });
+    } else {
+      axios.put(`http://localhost:8082/${props.table}/update`, {
+        name: data.name,
+        email: data.email,
+        id: props.id,
+      });
+    }
   };
   return (
     <Modal
@@ -163,191 +172,192 @@ function Modalst(props) {
         </div>
       </Modal.Header>
 
-      <Modal.Body>
-        <Form>
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
-            <Form.Label column sm="2">
-              name
-            </Form.Label>
-            <Col sm="10">
-              <Form.Control
-                onChange={(e) => validate(e.target.value, "name")}
-                placeholder="name"
-                defaultValue={props.name}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
-            <Form.Label column sm="2">
-              Img
-            </Form.Label>
-            <Col sm="10">
-              <Form.Control
-                placeholder="img"
-                defaultValue={props.img}
-                onChange={(e) => validate(e.target.value, "img")}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
-            <Form.Label column sm="2">
-              Description
-            </Form.Label>
-            <Col sm="10">
-              <Form.Control
-                placeholder="description"
-                defaultValue={props.description}
-                onChange={(e) => validate(e.target.value, "description")}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
-            <Form.Label column sm="2">
-              Price
-            </Form.Label>
-            <Col sm="10">
-              <Form.Control
-                placeholder="price"
-                defaultValue={props.cost}
-                onChange={(e) => validate(e.target.value, "cost")}
-              />
-            </Col>
-          </Form.Group>
+      {props.table === "products" ? (
+        <Modal.Body>
+          <Form>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Name
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "name")}
+                  placeholder={props.name}
+                />
+              </Col>
+            </Form.Group>
 
-          <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
-            <Form.Label column sm="2">
-              Category
-            </Form.Label>
-            <Col sm="10">
-              <DropdownButton id="dropdown-basic-button" title={props.category}>
-                <Dropdown.Item
-                  onClick={(e) => {
-                    setDropDownButtonLabel("man");
-                    validate("man", "category");
-                  }}
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Color
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "color")}
+                  placeholder="color"
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Size
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "size")}
+                  placeholder="size"
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Amount
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "amount")}
+                  placeholder="amount"
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Season
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "season")}
+                  placeholder="season"
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Img
+              </Form.Label>
+
+              <Col sm="10">
+                <Form.Control
+                  placeholder="img"
+                  onChange={(e) => validate(e.target.value, "img")}
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Description
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  placeholder="description"
+                  onChange={(e) => validate(e.target.value, "description")}
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Price
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  placeholder="price"
+                  onChange={(e) => validate(e.target.value, "price")}
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Category
+              </Form.Label>
+              <Col sm="10">
+                <DropdownButton
+                  id="dropdown-basic-button"
+                  title={dropDownButtonLabel}
                 >
-                  man
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={(e) => {
-                    setDropDownButtonLabel("woman");
-                    validate("woman", "category");
-                  }}
-                >
-                  woman
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={(e) => {
-                    setDropDownButtonLabel("child");
-                    validate("child", "category");
-                  }}
-                >
-                  child
-                </Dropdown.Item>
-              </DropdownButton>
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} className="mb-2" controlId="formPlaintext">
-            <Form.Label column sm="2">
-              Color
-            </Form.Label>
-            <Col sm="10">
-              <div className="d-flex flex-row mt-2">
-                <span class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                    onClick={() => validateColor("black")}
-                  />
-                  <label class="form-check-label me-2" for="flexCheckDefault">
-                    Черен
-                  </label>
-                </span>
-                <span class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                    onClick={() => validateColor("blue")}
-                  />
-                  <label class="form-check-label me-2" for="flexCheckDefault">
-                    Син
-                  </label>
-                </span>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                    onClick={() => validateColor("white")}
-                  />
-                  <label class="form-check-label me-2" for="flexCheckDefault">
-                    Бял
-                  </label>
-                </div>
+                  <Dropdown.Item
+                    onClick={(e) => {
+                      setDropDownButtonLabel("man");
+                      validate("man", "category");
+                    }}
+                  >
+                    man
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => {
+                      setDropDownButtonLabel("woman");
+                      validate("woman", "category");
+                    }}
+                  >
+                    woman
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => {
+                      setDropDownButtonLabel("child");
+                      validate("child", "category");
+                    }}
+                  >
+                    child
+                  </Dropdown.Item>
+                </DropdownButton>
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="" controlId="formPlaintext">
+              <div className={"d-flex justify-content-center mt-3"}>
+                <Button
+                  style={{ width: "50%" }}
+                  as="input"
+                  type="button"
+                  value="Създай"
+                  onClick={() => onSubmit(data)}
+                />{" "}
               </div>
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} className="" controlId="formPlaintext">
-            <Form.Label column sm="2">
-              Size
-            </Form.Label>
-            <Col sm="10">
-              <div className="d-flex flex-row mt-2 ">
-                <span class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                    onClick={() => validateSize("41")}
-                  />
-                  <label class="form-check-label me-2" for="flexCheckDefault">
-                    41
-                  </label>
-                </span>
-                <span class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                    onClick={() => validateSize("42")}
-                  />
-                  <label class="form-check-label me-2" for="flexCheckDefault">
-                    42
-                  </label>
-                </span>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                    onClick={() => validateSize("43")}
-                  />
-                  <label class="form-check-label me-2" for="flexCheckDefault">
-                    43
-                  </label>
-                </div>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+      ) : (
+        <Modal.Body>
+          <Form>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Name
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "name")}
+                  placeholder="name"
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Email
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "email")}
+                  placeholder="email"
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="" controlId="formPlaintext">
+              <div className={"d-flex justify-content-center mt-3"}>
+                <Button
+                  style={{ width: "50%" }}
+                  as="input"
+                  type="button"
+                  value="Създай"
+                  onClick={() => onSubmit(data)}
+                />{" "}
               </div>
-            </Col>
-            <div className={"d-flex justify-content-center mt-3"}>
-              <Button
-                style={{ width: "50%" }}
-                as="input"
-                type="button"
-                value="редактирай"
-                onClick={() => onSubmit(data)}
-              />{" "}
-            </div>
-          </Form.Group>
-        </Form>
-      </Modal.Body>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+      )}
     </Modal>
   );
 }

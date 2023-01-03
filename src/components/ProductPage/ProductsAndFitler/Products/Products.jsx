@@ -12,21 +12,28 @@ const Products = ({ cat }) => {
   const [dropDownButtonLabel, setDropDownButtonLabel] =
     useState("Първо най-евтините");
   const [products, setProducts] = useState([]);
-  const [checkedBlack, setCheckedBlack] = useState(false);
-  const [checkedBlue, setCheckedBlue] = useState(false);
+  const [allowFilter, setAllowFilter] = useState(false);
+  const [filter, setFilter] = useState({
+    black: false,
+    blue: false,
+    white: false,
+    xl: false,
+    m: false,
+    s: false,
+  });
   useEffect(() => {
     const fetchproducts = async () => {
-      const { data } = await axios.get("http://localhost:8082/products/all");
-      let filteredData;
-      if (!cat === "all") {
-        filteredData = data.filter((item) => item.category === cat);
+      if (cat === "all") {
+        const { data } = await axios.get(`http://localhost:8082/products/all`);
+        setProducts(data);
+        setOriginalData(data);
       } else {
-        filteredData = data;
+        const { data } = await axios.get(
+          `http://localhost:8082/products/category/${cat}`
+        );
+        setProducts(data);
+        setOriginalData(data);
       }
-
-      setProducts(filteredData);
-      setOriginalData(filteredData);
-      console.log(filteredData);
     };
     fetchproducts();
   }, []);
@@ -51,52 +58,37 @@ const Products = ({ cat }) => {
     );
     setDropDownButtonLabel("Първо най-новите");
   };
-  const setColor = (color) => {
-    if (!checkedBlack) {
-      setProducts((prev) =>
-        [...prev].filter(
-          (item) =>
-            item.color[0] === color ||
-            item.color[1] === color ||
-            item.color[2] === color
-        )
-      );
-      setCheckedBlack(true);
-    } else {
-      setCheckedBlack(false);
-      setProducts(originalData);
-    }
-    if (!checkedBlue) {
-      setProducts((prev) =>
-        [...prev].filter(
-          (item) =>
-            item.color[0] === color ||
-            item.color[1] === color ||
-            item.color[2] === color
-        )
-      );
-      if (setCheckedBlack) {
-        setProducts(
-          (prev) => [...prev],
-          products.filter(
-            (item) =>
-              item.color[0] === "black" ||
-              item.color[1] === "black" ||
-              item.color[2] === "black"
-          )
-        );
-      }
-      setCheckedBlue(true);
-    } else {
-      setCheckedBlue(false);
-      setProducts(originalData);
-    }
 
-    console.log(products);
+  const checkFilterData = (filterItem, value) => {
+    if ([value === false]) {
+      setFilter((existingValues) => ({
+        ...existingValues,
+        [filterItem]: value,
+      }));
+    }
+    if ([value === true]) {
+      setFilter((existingValues) => ({
+        ...existingValues,
+        [filterItem]: value,
+      }));
+    }
+    setAllowFilter(true);
   };
-  const setSize = (size) => {
-    setProducts((prev) => [...prev].filter((a) => a.size[3] === size));
-  };
+  useEffect(() => {
+    if (allowFilter === true) {
+      if (cat === "all") {
+        axios.get(`http://localhost:8082/products/filter/all`, {
+          data: filter,
+        });
+        console.log(filter);
+      } else {
+        axios.get(`http://localhost:8082/products/category/filter/${cat}`, {
+          data: filter,
+        });
+        console.log(filter);
+      }
+    }
+  }, [filter, setFilter]);
 
   return (
     <>
@@ -113,7 +105,7 @@ const Products = ({ cat }) => {
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
-                      onClick={() => setColor("black")}
+                      onClick={() => checkFilterData("black", !filter.black)}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
                       Черен
@@ -125,7 +117,7 @@ const Products = ({ cat }) => {
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
-                      onClick={() => setColor("white")}
+                      onClick={() => checkFilterData("blue", !filter.blue)}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
                       Син
@@ -137,7 +129,7 @@ const Products = ({ cat }) => {
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
-                      onClick={() => setColor("white")}
+                      onClick={() => checkFilterData("white", !filter.white)}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
                       Бял
@@ -154,10 +146,10 @@ const Products = ({ cat }) => {
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
-                      onClick={() => setSize("43")}
+                      onClick={() => checkFilterData("xl", !filter.xl)}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
-                      41
+                      xl
                     </label>
                   </div>
                   <div class="form-check">
@@ -166,9 +158,10 @@ const Products = ({ cat }) => {
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
+                      onClick={() => checkFilterData("m", !filter.m)}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
-                      Син
+                      m
                     </label>
                   </div>
                   <div class="form-check">
@@ -177,9 +170,10 @@ const Products = ({ cat }) => {
                       type="checkbox"
                       value=""
                       id="flexCheckDefault"
+                      onClick={() => checkFilterData("s", !filter.s)}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
-                      Бял
+                      s
                     </label>
                   </div>
                 </Accordion.Body>
@@ -209,9 +203,9 @@ const Products = ({ cat }) => {
               </DropdownButton>
             </div>
 
-            <div className="d-flex row f-row justify-content-between align-items-center ">
+            <div className="d-flex row f-row  align-items-center ">
               {products.map((product) => (
-                <div className="col-4">
+                <div className="col-4 ">
                   <Product
                     linkUrl={`/${cat}/${product.id}`}
                     imgSrc={"./221025-102_1web.jpg"}
