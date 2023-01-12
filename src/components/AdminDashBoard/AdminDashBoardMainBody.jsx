@@ -12,22 +12,25 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { redirect } from "react-router-dom";
+import Product from "./../ProductPage/ProductsAndFitler/Products/Product";
 const AdminDashBoardMainBody = ({ table }) => {
   const [modalShow, setModalShow] = useState(false);
   const [products, setProducts] = useState([]);
+  const [reFetch, setReFetch] = useState(false);
   const [selected, setSelected] = useState("products");
   let location = useLocation();
 
+  const fetch = (placeholder) => {
+    setReFetch(!reFetch);
+  };
+
   useEffect(() => {
     const fetchproducts = async () => {
-      console.log(table);
       const { data } = await axios.get(`http://localhost:8082/${table}/all`);
-      // TODO Тука ще трябва да се взимат данните от продутките, усери или админи
       setProducts(data);
-      console.log(data);
     };
     fetchproducts();
-  }, []);
+  }, [setReFetch, reFetch, fetch]);
   useEffect(() => {
     setSelected(location.pathname.split("/")[2]);
   }, [location]);
@@ -104,10 +107,14 @@ const AdminDashBoardMainBody = ({ table }) => {
               ></input>
             </div>
             <div className="col-2">ID</div>
-            <div className="col-2">USER</div>
-            <div className="col-2">3</div>
-            <div className="col-2">4</div>
-            <div className="col-1">5</div>
+            <div className="col-2">Info</div>
+            <div className="col-2">
+              {table === "products" ? "Category" : "Email"}
+            </div>
+            <div className="col-2">
+              {table === "products" ? "Price" : "Favourite"}
+            </div>
+            <div className="col-1"></div>
 
             <span className=" col-1 adminDashBoardMainBody pt-1 pb-1 ms-5 d-flex  justify-content-center align-items-center">
               <span onClick={() => setModalShow(true)}> Add new </span>
@@ -115,6 +122,7 @@ const AdminDashBoardMainBody = ({ table }) => {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 table={table}
+                fetch={fetch}
               />
             </span>
           </div>
@@ -122,6 +130,7 @@ const AdminDashBoardMainBody = ({ table }) => {
             <AdminDashBoardTableList
               id={e.id}
               name={e.name}
+              price={e.price}
               img={e.img}
               description={e.description}
               cost={e.cost}
@@ -131,6 +140,8 @@ const AdminDashBoardMainBody = ({ table }) => {
               userId={e.userId}
               table={table}
               email={e.email}
+              adminId={e.adminId}
+              fetch={fetch}
             />
           ))}
         </div>
@@ -154,6 +165,8 @@ function Modalst(props) {
     season: "",
     user: 1,
     email: "",
+    userId: "",
+    adminId: "",
   });
   useEffect(() => {
     console.log(fetch);
@@ -178,15 +191,23 @@ function Modalst(props) {
         size: data.size,
         category: data.category,
         price: data.price,
-        amount: data.amount,
+        amount: 1,
         season: data.season,
       });
-    } else {
+    } else if (props.table === "user") {
       axios.post(`http://localhost:8082/${props.table}/create`, {
         name: data.name,
         email: data.email,
+        userId: data.userId,
+      });
+    } else if (props.table === "admins") {
+      axios.post(`http://localhost:8082/${props.table}/create`, {
+        name: data.name,
+        email: data.email,
+        adminId: data.adminId,
       });
     }
+    props.fetch("boom");
   };
   return (
     <Modal
@@ -343,7 +364,7 @@ function Modalst(props) {
                   style={{ width: "50%" }}
                   as="input"
                   type="button"
-                  value="Създай"
+                  value="Create"
                   onClick={() => onSubmit(data)}
                 />{" "}
               </div>
@@ -376,6 +397,28 @@ function Modalst(props) {
                 />
               </Col>
             </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                User
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "userId")}
+                  placeholder="userId"
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Admin
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "adminId")}
+                  placeholder="adminId"
+                />
+              </Col>
+            </Form.Group>
 
             <Form.Group as={Row} className="" controlId="formPlaintext">
               <div className={"d-flex justify-content-center mt-3"}>
@@ -383,7 +426,7 @@ function Modalst(props) {
                   style={{ width: "50%" }}
                   as="input"
                   type="button"
-                  value="Създай"
+                  value="Create"
                   onClick={() => onSubmit(data)}
                 />{" "}
               </div>

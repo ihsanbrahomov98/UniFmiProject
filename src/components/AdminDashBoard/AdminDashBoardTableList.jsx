@@ -18,9 +18,12 @@ const AdminDashBoardTableList = ({
   color,
   size,
   userId,
+  price,
+  adminId,
   table,
   id,
   email,
+  fetch,
 }) => {
   const [modalShow, setModalShow] = React.useState(false);
   const deleteProduct = () => {
@@ -41,6 +44,18 @@ const AdminDashBoardTableList = ({
         withCredentials: true,
       }
     );
+    fetch("delete");
+  };
+  const CheckInfo = () => {
+    if (userId) {
+      return userId;
+    }
+    if (adminId) {
+      return adminId;
+    }
+    if (price) {
+      return price;
+    }
   };
   return (
     <>
@@ -71,7 +86,7 @@ const AdminDashBoardTableList = ({
 
         <div className="col-2">{table === "products" ? category : email}</div>
         <div className="col-2 " style={{ color: "green" }}>
-          active
+          {CheckInfo()}
         </div>
         <div className="col-3">
           <div className=" d-flex align-items- justify-content-start flex-row">
@@ -81,6 +96,7 @@ const AdminDashBoardTableList = ({
               </div>
 
               <Modalst
+                fetch={fetch}
                 show={modalShow}
                 id={id}
                 name={name}
@@ -91,6 +107,7 @@ const AdminDashBoardTableList = ({
                 color={color}
                 size={size}
                 userId={userId}
+                adminId={adminId}
                 table={table}
                 email={email}
                 onHide={() => setModalShow(false)}
@@ -122,7 +139,8 @@ function Modalst(props) {
     amount: "",
     season: "",
     email: "",
-    id: props.id,
+    userId: "",
+    adminId: "",
   });
   const validate = (dataInfo, dataType) => {
     setData((prevState) => ({
@@ -143,16 +161,24 @@ function Modalst(props) {
         size: data.size,
         category: data.category,
         price: data.price,
-        amount: data.amount,
+        amount: 1,
         season: data.season,
         id: props.id,
+        userId: data.userId,
       });
-    } else {
+    } else if (props.table === "user") {
       axios.put(`http://localhost:8082/${props.table}/update`, {
         name: data.name,
         email: data.email,
-        id: props.id,
+        userId: data.userId,
       });
+    } else if (props.table === "admins") {
+      axios.post(`http://localhost:8082/${props.table}/update`, {
+        name: data.name,
+        email: data.email,
+        adminId: data.adminId,
+      });
+      props.fetch("update");
     }
   };
   return (
@@ -182,7 +208,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "name")}
-                  placeholder={props.name}
+                  placeholder="name"
                 />
               </Col>
             </Form.Group>
@@ -310,7 +336,7 @@ function Modalst(props) {
                   style={{ width: "50%" }}
                   as="input"
                   type="button"
-                  value="Създай"
+                  value="Update"
                   onClick={() => onSubmit(data)}
                 />{" "}
               </div>
@@ -344,13 +370,36 @@ function Modalst(props) {
               </Col>
             </Form.Group>
 
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                Product
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "userId")}
+                  placeholder="product"
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="formPlaintext">
+              <Form.Label column sm="2">
+                User
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  onChange={(e) => validate(e.target.value, "adminId")}
+                  placeholder="user"
+                />
+              </Col>
+            </Form.Group>
             <Form.Group as={Row} className="" controlId="formPlaintext">
               <div className={"d-flex justify-content-center mt-3"}>
                 <Button
                   style={{ width: "50%" }}
                   as="input"
                   type="button"
-                  value="Създай"
+                  value="Update"
                   onClick={() => onSubmit(data)}
                 />{" "}
               </div>

@@ -10,13 +10,11 @@ const Product = ({
   heightRem,
   widthRem,
   gutterRem,
+  color,
 }) => {
   return (
     <>
-      <div
-        className="container  "
-        style={{ height: heightRem, width: widthRem }}
-      >
+      <div className="container" style={{ height: heightRem, width: widthRem }}>
         <Link style={{ textDecoration: "none" }} to={linkUrl}>
           <div>
             <img
@@ -28,7 +26,7 @@ const Product = ({
 
             <span className="productNameColor">{nameInfo}</span>
             <span className="productNameColor ms-1 me-1">/</span>
-            <span className="productNameColor">Бежев</span>
+            <span className="productNameColor">{color}</span>
             <div></div>
 
             <span className="fs-5 productNameColor  productPriceLine">

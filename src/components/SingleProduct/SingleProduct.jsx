@@ -63,7 +63,7 @@ const SingleProduct = () => {
             <div className="container m-5">
               <div>
                 <img
-                  src="https://carducci.bg/wp-content/uploads/2021/06/2004090138_1web.jpg"
+                  src={product.image}
                   alt="tree"
                   style={{ width: "35rem", height: "45rem" }}
                   className=" border figure-img img-fluid rounded"

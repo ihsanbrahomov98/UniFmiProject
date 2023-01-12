@@ -75,19 +75,24 @@ const Products = ({ cat }) => {
     setAllowFilter(true);
   };
   useEffect(() => {
-    if (allowFilter === true) {
-      if (cat === "all") {
-        axios.get(`http://localhost:8082/products/filter/all`, {
-          data: filter,
-        });
-        console.log(filter);
-      } else {
-        axios.get(`http://localhost:8082/products/category/filter/${cat}`, {
-          data: filter,
-        });
-        console.log(filter);
+    const fetchProductByFilter = async () => {
+      if (allowFilter === true) {
+        if (cat === "all") {
+          const { data } = await axios.get(
+            `http://localhost:8082/products/category/filter/all/${filter.black}/${filter.blue}/${filter.white}/${filter.xl}/${filter.m}/${filter.s}`
+          );
+          console.log(data);
+          setProducts(data);
+        } else {
+          const { data } = await axios.get(
+            `http://localhost:8082/products/category/filter/${cat}/${filter.black}/${filter.blue}/${filter.white}/${filter.xl}/${filter.m}/${filter.s}`
+          );
+          console.log(data);
+          setProducts(data);
+        }
       }
-    }
+    };
+    fetchProductByFilter();
   }, [filter, setFilter]);
 
   return (
@@ -212,6 +217,7 @@ const Products = ({ cat }) => {
                     altInfo={"tree"}
                     nameInfo={product.name}
                     price={product.price}
+                    color={product.color}
                     heightRem={"22rem"}
                     widthRem={"17rem"}
                     gutterRem={"10rem"}
