@@ -11,9 +11,7 @@ const ModalSearch = (props) => {
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get("http://localhost:8082/products/all");
-
       setProducts(data);
-      console.log(data);
     };
     fetchproducts();
   }, []);
@@ -53,7 +51,7 @@ const ModalSearch = (props) => {
                   <div className="col-2 me-5 ">
                     <Product
                       linkUrl={`/${"all"}/${product.id}`}
-                      imgSrc={"./221025-102_1web.jpg"}
+                      imgSrc={product.img}
                       altInfo={"tree"}
                       nameInfo={product.name}
                       price={product.price}

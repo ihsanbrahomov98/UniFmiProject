@@ -63,7 +63,7 @@ const SingleProduct = () => {
             <div className="container m-5">
               <div>
                 <img
-                  src={product.image}
+                  src={product.img}
                   alt="tree"
                   style={{ width: "35rem", height: "45rem" }}
                   className=" border figure-img img-fluid rounded"
@@ -81,7 +81,7 @@ const SingleProduct = () => {
             <div className="container m-5">
               <div className="container mt-4">
                 <div className="m-2">
-                  Начало / Облекла / Връхни облекла / Якета / ЯКЕ CASUAL NAVY
+                  Начало / Облекла / Връхни облекла / Якета
                 </div>
                 <div className="m-2 fs-2 fw-bold">{product.name}</div>
                 <span className="m-2 fs-5 productNameColor  productPriceLine">
@@ -92,7 +92,7 @@ const SingleProduct = () => {
                 </span>
 
                 <div className="m-2">{product.description}</div>
-                <div className="m-2">{product.category}</div>
+                <div className="m-2">{(product.size + "").toUpperCase()}</div>
                 <div className="m-2">
                   <div className="d-flex flex-row">
                     <span

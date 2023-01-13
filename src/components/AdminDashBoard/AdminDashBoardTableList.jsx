@@ -75,7 +75,11 @@ const AdminDashBoardTableList = ({
           <div className="">
             <div className=" d-flex align-items- justify-content-start flex-row">
               <img
-                src="https://carducci.bg/wp-content/uploads/2021/06/2004090138_1web.jpg"
+                src={
+                  img
+                    ? img
+                    : "https://carducci.bg/wp-content/uploads/2021/06/2004090138_1web.jpg"
+                }
                 alt="tree"
                 style={{ width: "12%", height: "7%" }}
               />

@@ -354,6 +354,22 @@ function Modalst(props) {
                   >
                     child
                   </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => {
+                      setDropDownButtonLabel("sport");
+                      validate("sport", "category");
+                    }}
+                  >
+                    sport
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => {
+                      setDropDownButtonLabel("christmas");
+                      validate("christmas", "category");
+                    }}
+                  >
+                    christmas
+                  </Dropdown.Item>
                 </DropdownButton>
               </Col>
             </Form.Group>

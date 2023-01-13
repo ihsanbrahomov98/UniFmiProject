@@ -213,7 +213,7 @@ const Products = ({ cat }) => {
                 <div className="col-4 ">
                   <Product
                     linkUrl={`/${cat}/${product.id}`}
-                    imgSrc={"./221025-102_1web.jpg"}
+                    imgSrc={product.img}
                     altInfo={"tree"}
                     nameInfo={product.name}
                     price={product.price}
