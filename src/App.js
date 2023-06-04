@@ -13,6 +13,8 @@ import ChildProductPage from "./pages/ProductPage/ChildProductPage";
 import SportProductPage from "./pages/ProductPage/SportProductPage";
 import ChristmasProductPage from "./pages/ProductPage/ChristmasProductPage";
 import AllProductPage from "./pages/ProductPage/AllProductPage";
+import LoginPage from "./pages/LoignPage/LoginPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
 
         <Route path="/:cat/:id" element={<SingleProductPage />}></Route>
         <Route path="/cart" element={<CartPage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/register" element={<RegisterPage />}></Route>
         <Route
           path="/admindashboard/products"
           element={<AdminDashBoard />}

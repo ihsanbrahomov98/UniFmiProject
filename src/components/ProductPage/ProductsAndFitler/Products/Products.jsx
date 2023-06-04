@@ -24,12 +24,12 @@ const Products = ({ cat }) => {
   useEffect(() => {
     const fetchproducts = async () => {
       if (cat === "all") {
-        const { data } = await axios.get(`http://localhost:8082/products/all`);
+        const { data } = await axios.get(`http://localhost:5550/products/all`);
         setProducts(data);
         setOriginalData(data);
       } else {
         const { data } = await axios.get(
-          `http://localhost:8082/products/category/${cat}`
+          `http://localhost:5550/products/category/${cat}`
         );
         setProducts(data);
         setOriginalData(data);
@@ -79,13 +79,13 @@ const Products = ({ cat }) => {
       if (allowFilter === true) {
         if (cat === "all") {
           const { data } = await axios.get(
-            `http://localhost:8082/products/category/filter/all/${filter.black}/${filter.blue}/${filter.white}/${filter.xl}/${filter.m}/${filter.s}`
+            `http://localhost:5550/products/category/filter/all/${filter.black}/${filter.blue}/${filter.white}/${filter.xl}/${filter.m}/${filter.s}`
           );
           console.log(data);
           setProducts(data);
         } else {
           const { data } = await axios.get(
-            `http://localhost:8082/products/category/filter/${cat}/${filter.black}/${filter.blue}/${filter.white}/${filter.xl}/${filter.m}/${filter.s}`
+            `http://localhost:5550/products/category/filter/${cat}/${filter.black}/${filter.blue}/${filter.white}/${filter.xl}/${filter.m}/${filter.s}`
           );
           console.log(data);
           setProducts(data);
@@ -212,7 +212,7 @@ const Products = ({ cat }) => {
               {products.map((product) => (
                 <div className="col-4 ">
                   <Product
-                    linkUrl={`/${cat}/${product.id}`}
+                    linkUrl={`/${cat}/${product._id}`}
                     imgSrc={product.img}
                     altInfo={"tree"}
                     nameInfo={product.name}

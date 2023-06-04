@@ -24,12 +24,14 @@ const AdminDashBoardTableList = ({
   id,
   email,
   fetch,
+  amount,
+  season,
 }) => {
   const [modalShow, setModalShow] = React.useState(false);
   const deleteProduct = () => {
     console.log(id);
     axios.delete(
-      `http://localhost:8082/${table}/delete`,
+      `http://localhost:5550/${table}/delete`,
 
       {
         data: {
@@ -104,6 +106,9 @@ const AdminDashBoardTableList = ({
                 show={modalShow}
                 id={id}
                 name={name}
+                amount={amount}
+                season={season}
+                price={price}
                 img={img}
                 description={description}
                 cost={cost}
@@ -131,7 +136,9 @@ const AdminDashBoardTableList = ({
 };
 
 function Modalst(props) {
-  const [dropDownButtonLabel, setDropDownButtonLabel] = useState("man");
+  const [dropDownButtonLabel, setDropDownButtonLabel] = useState(
+    props.category
+  );
   const [data, setData] = useState({
     name: "",
     img: "",
@@ -157,7 +164,7 @@ function Modalst(props) {
   const onSubmit = (value) => {
     console.log(props.table);
     if (props.table === "products") {
-      axios.put(`http://localhost:8082/${props.table}/update`, {
+      axios.put(`http://localhost:5550/${props.table}/update`, {
         name: data.name,
         img: data.img,
         description: data.description,
@@ -171,13 +178,13 @@ function Modalst(props) {
         userId: data.userId,
       });
     } else if (props.table === "user") {
-      axios.put(`http://localhost:8082/${props.table}/update`, {
+      axios.put(`http://localhost:5550/${props.table}/update`, {
         name: data.name,
         email: data.email,
         userId: data.userId,
       });
     } else if (props.table === "admins") {
-      axios.post(`http://localhost:8082/${props.table}/update`, {
+      axios.post(`http://localhost:5550/${props.table}/update`, {
         name: data.name,
         email: data.email,
         adminId: data.adminId,
@@ -212,7 +219,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "name")}
-                  placeholder="name"
+                  placeholder={props.name ? props.name : ""}
                 />
               </Col>
             </Form.Group>
@@ -224,7 +231,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "color")}
-                  placeholder="color"
+                  placeholder={props.color ? props.color : ""}
                 />
               </Col>
             </Form.Group>
@@ -236,7 +243,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "size")}
-                  placeholder="size"
+                  placeholder={props.size ? props.size : ""}
                 />
               </Col>
             </Form.Group>
@@ -247,7 +254,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "amount")}
-                  placeholder="amount"
+                  placeholder={props.amount ? props.amount : ""}
                 />
               </Col>
             </Form.Group>
@@ -258,7 +265,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "season")}
-                  placeholder="season"
+                  placeholder={props.season ? props.season : ""}
                 />
               </Col>
             </Form.Group>
@@ -269,7 +276,7 @@ function Modalst(props) {
 
               <Col sm="10">
                 <Form.Control
-                  placeholder="img"
+                  placeholder={props.img ? props.img : ""}
                   onChange={(e) => validate(e.target.value, "img")}
                 />
               </Col>
@@ -280,7 +287,7 @@ function Modalst(props) {
               </Form.Label>
               <Col sm="10">
                 <Form.Control
-                  placeholder="description"
+                  placeholder={props.description ? props.description : ""}
                   onChange={(e) => validate(e.target.value, "description")}
                 />
               </Col>
@@ -291,7 +298,7 @@ function Modalst(props) {
               </Form.Label>
               <Col sm="10">
                 <Form.Control
-                  placeholder="price"
+                  placeholder={props.price ? props.price : ""}
                   onChange={(e) => validate(e.target.value, "price")}
                 />
               </Col>
@@ -330,6 +337,22 @@ function Modalst(props) {
                   >
                     child
                   </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => {
+                      setDropDownButtonLabel("sport");
+                      validate("sport", "category");
+                    }}
+                  >
+                    sport
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => {
+                      setDropDownButtonLabel("christmas");
+                      validate("christmas", "category");
+                    }}
+                  >
+                    christmas
+                  </Dropdown.Item>
                 </DropdownButton>
               </Col>
             </Form.Group>
@@ -357,7 +380,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "name")}
-                  placeholder="name"
+                  placeholder={props.name ? props.name : ""}
                 />
               </Col>
             </Form.Group>
@@ -369,7 +392,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "email")}
-                  placeholder="email"
+                  placeholder={props.email ? props.email : ""}
                 />
               </Col>
             </Form.Group>
@@ -381,7 +404,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "userId")}
-                  placeholder="product"
+                  placeholder={props.userId ? props.userId : ""}
                 />
               </Col>
             </Form.Group>
@@ -393,7 +416,7 @@ function Modalst(props) {
               <Col sm="10">
                 <Form.Control
                   onChange={(e) => validate(e.target.value, "adminId")}
-                  placeholder="user"
+                  placeholder={props.adminId ? props.adminId : ""}
                 />
               </Col>
             </Form.Group>

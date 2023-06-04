@@ -10,7 +10,7 @@ const ModalSearch = (props) => {
   const [products, setProducts] = useState("");
   useEffect(() => {
     const fetchproducts = async () => {
-      const { data } = await axios.get("http://localhost:8082/products/all");
+      const { data } = await axios.get("http://localhost:5550/products/all");
       setProducts(data);
     };
     fetchproducts();

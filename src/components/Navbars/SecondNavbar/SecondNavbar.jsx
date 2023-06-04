@@ -11,12 +11,15 @@ import { CaretUp } from "react-bootstrap-icons";
 import ButtonDropDown from "./NavbarDropDownMenu/ButtonDropDown/ButtonDropDown";
 import ModalSearch from "./ModalSearch.jsx/ModalSearch";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const SecondNavbar = () => {
   const [toggledDropDownOne, setToggledDropDownOne] = useState(false);
   const [toggledDropDownTwo, setToggledDropDownTwo] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
   const [open, setOpen] = useState(false);
   const buttonRef = useRef();
+  const userData = useSelector((state) => state.user);
 
   useEffect(() => {
     let handler = (event) => {
@@ -63,19 +66,38 @@ const SecondNavbar = () => {
               setToggledDropDownOne(false);
             }}
           >
-            <Person className=" customFont" />
+            <Link
+              style={{ textDecoration: "none", color: "black" }}
+              to={"/cart"}
+            >
+              <div className="d-flex  pe-2 justify-content-center align-items-center">
+                <Cart className=" customFont" />
+              </div>
+            </Link>
 
-            <CaretDown />
+            {!userData.email ? (
+              <Link
+                style={{ textDecoration: "none", color: "black" }}
+                to={"/login"}
+              >
+                <span className="d-flex flex-row align-items-center justify-content-center">
+                  <Person className=" customFont" />
+                  <CaretDown />
+
+                  <span>Логин</span>
+                </span>
+              </Link>
+            ) : (
+              <span className="d-flex flex-row align-items-center justify-content-center">
+                <Person className=" customFont" />
+                <CaretDown />
+                {userData.email}
+              </span>
+            )}
           </div>
           <div className="ButtonDropDown_container">
             <div className="ButtonDropDown_Arrow"></div>
-            <BodyOfDropDown open={open} />{" "}
           </div>
-          <Link style={{ textDecoration: "none", color: "black" }} to={"/cart"}>
-            <div className="d-flex  p-2 justify-content-center align-items-center">
-              <Cart className=" customFont" />
-            </div>
-          </Link>
         </div>
       </div>
     </>

@@ -14,6 +14,7 @@ import {
 } from "../../redux/Slice/ProductSlice";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import WriteReview from "../ReviewsComponents/WriteReview/WriteReview";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState([]);
@@ -23,7 +24,7 @@ const SingleProduct = () => {
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get(
-        `http://localhost:8082/products/findone/${id}`
+        `http://localhost:5550/products/findone/${id}`
       );
 
       setProduct(data);
@@ -58,7 +59,7 @@ const SingleProduct = () => {
           {" "}
           <div
             className="container m-5"
-            style={{ height: "45rem", width: "35rem" }}
+            style={{ height: "35rem", width: "35rem" }}
           >
             <div className="container m-5">
               <div>
@@ -149,6 +150,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
+      <WriteReview item={product} />
     </>
   );
 };

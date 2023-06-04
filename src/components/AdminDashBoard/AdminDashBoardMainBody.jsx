@@ -26,7 +26,7 @@ const AdminDashBoardMainBody = ({ table }) => {
 
   useEffect(() => {
     const fetchproducts = async () => {
-      const { data } = await axios.get(`http://localhost:8082/${table}/all`);
+      const { data } = await axios.get(`http://localhost:5550/${table}/all`);
       setProducts(data);
     };
     fetchproducts();
@@ -141,6 +141,8 @@ const AdminDashBoardMainBody = ({ table }) => {
               table={table}
               email={e.email}
               adminId={e.adminId}
+              amount={e.amount}
+              season={e.season}
               fetch={fetch}
             />
           ))}
@@ -183,7 +185,7 @@ function Modalst(props) {
   const onSubmit = (value) => {
     console.log(props.table);
     if (props.table === "products") {
-      axios.post(`http://localhost:8082/${props.table}/create`, {
+      axios.post(`http://localhost:5550/${props.table}/create`, {
         name: data.name,
         img: data.img,
         description: data.description,
@@ -193,15 +195,16 @@ function Modalst(props) {
         price: data.price,
         amount: 1,
         season: data.season,
+        rating: 5,
       });
     } else if (props.table === "user") {
-      axios.post(`http://localhost:8082/${props.table}/create`, {
+      axios.post(`http://localhost:5550/${props.table}/create`, {
         name: data.name,
         email: data.email,
         userId: data.userId,
       });
     } else if (props.table === "admins") {
-      axios.post(`http://localhost:8082/${props.table}/create`, {
+      axios.post(`http://localhost:5550/${props.table}/create`, {
         name: data.name,
         email: data.email,
         adminId: data.adminId,
