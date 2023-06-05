@@ -77,8 +77,9 @@ const Body = () => {
             telephone: formState.telephone,
           })
           .then((response) => {
-            if (response.data.username) {
-              dispatch(setUser(response.data));
+            console.log(response.data);
+            dispatch(setUser(response.data));
+            if (response.data) {
               navigate("/");
             }
           })
